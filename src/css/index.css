@@ -13,10 +13,39 @@ code {
 }
 
 #header {
-  position: relative;
+  position: fixed;
   z-index: 10;
-  max-width: 100%;
+  width: 100%;
   background: #fff;
   -webkit-box-shadow: 0 2px 8px #f0f1f2;
   box-shadow: 0 2px 8px #f0f1f2;
+}
+
+.main-wrapper {
+  position: relative;
+  padding: 80px 0 0;
+  background: #fff;
+}
+
+#logo{
+  float: left;
+  height: 64px;
+  padding-left: 40px;
+  overflow: hidden;
+  line-height: 64px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.main-menu:hover .main-menu-inner {
+  overflow-y: auto;
+}
+
+.main-menu-inner {
+  max-height: calc(100vh - 96px);
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
