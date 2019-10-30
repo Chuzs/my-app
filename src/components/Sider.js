@@ -6,11 +6,10 @@ const { SubMenu } = Menu;
 class Sider extends React.Component {
     render() {
         return (
-            <div style={{ position: 'releative', top: '0', width: '20vw' }}>
+            <div>
                 <section className="main-menu-inner">
                     <Menu
                         mode="inline"
-                        defaultSelectedKeys={['1']}
                         defaultOpenKeys={['sub1']}
                     >
                         <SubMenu
@@ -22,7 +21,9 @@ class Sider extends React.Component {
                                     </span>
                             }
                         >
-                            <Menu.Item key="1">option1</Menu.Item>
+                            <Menu.Item key="1">
+                                <a href="/abc">option2</a>
+                            </Menu.Item>
                             <Menu.Item key="2">option2</Menu.Item>
                             <Menu.Item key="3">option3</Menu.Item>
                             <Menu.Item key="4">option4</Menu.Item>

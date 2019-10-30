@@ -12,7 +12,7 @@ class Header extends React.Component {
                             统一调度Demo
                         </a>
                     </Col>
-                    <Col xs={0} sm={0} md={19} lg={19} xl={19} xxl={20}>col-20</Col>
+                    <Col xs={0} sm={0} md={19} lg={19} xl={19} xxl={20}></Col>
                 </Row>
             </header>
         )
