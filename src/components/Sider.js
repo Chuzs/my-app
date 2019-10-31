@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
-
+import { Link } from "react-router-dom";
 const { SubMenu } = Menu;
 
 class Sider extends React.Component {
@@ -22,9 +22,9 @@ class Sider extends React.Component {
                             }
                         >
                             <Menu.Item key="1">
-                                <a href="/abc">option2</a>
+                                <Link to="/login">签入</Link>
                             </Menu.Item>
-                            <Menu.Item key="2">option2</Menu.Item>
+                            <Menu.Item key="2"><Link to="/resetAgentSkills">重设坐席技能</Link></Menu.Item>
                             <Menu.Item key="3">option3</Menu.Item>
                             <Menu.Item key="4">option4</Menu.Item>
                         </SubMenu>
