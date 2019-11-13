@@ -7,11 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 #header {
   position: fixed;
   z-index: 10;
@@ -40,12 +35,31 @@ code {
   font-weight: 500;
 }
 
-.main-menu:hover .main-menu-inner {
+.main-menu:hover .main-menu-inner ,.main-content .ant-card-body:hover {
   overflow-y: auto;
 }
 
 .main-menu-inner {
   max-height: calc(100vh - 96px);
+  overflow: hidden;
+}
+
+.main-content .ant-card-body{
+  max-height: calc(100vh - 146px);
   overflow-x: hidden;
   overflow-y: hidden;
+}
+#reqTextCard .ant-input:focus, #resTextCard .ant-input:focus {
+  border: none !important;
+  box-shadow: none;
+}
+
+#reqTextCard .ant-card-body, #resTextCard .ant-card-body {
+  padding: 0 !important;
+  border-top: 1px solid #e8e8e8;
+  border-radius: 0;
+}
+
+#resTextCard .ant-card-body .ant-input[disabled]:hover{
+  cursor: text;
 }

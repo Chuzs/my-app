@@ -1,84 +1,159 @@
 import React from 'react';
-import { Button, Card, Form, Input, Select } from 'antd';
+import { Button, Card, Form, Input, Select, Tooltip, Icon } from 'antd';
 const { Option } = Select;
 const formItemLayout = {
-    labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 },
-    },
-    wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 12 },
-    },
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 8 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 12 },
+  },
 };
-const Login = () => (
-    <Card type="inner" title="请求报文">
+const onValuesChange = (props, changedValues, allValues) => {
+  for (let key in allValues) {
+    if (allValues[key] === undefined) {
+      allValues[key] = "";
+    }
+  }
+  props.onChange(allValues);
+}
+class LoginCard extends React.Component {
+  onClick = () => console.log(this.props);
+  componentDidMount() {
+    onValuesChange(this.props, "", this.props.form.getFieldsValue());
+  }
+  render() {
+    const { getFieldDecorator } = this.props.form;
+    return (
+      <Card type="inner" title="签入">
         <Form {...formItemLayout}>
-            <Form.Item label="Fail">
-                <Input placeholder="unavailable choice" id="error" />
-            </Form.Item>
-            <Form.Item label="Warning">
-                <Input placeholder="Warning" id="warning" />
-            </Form.Item>
-            <Form.Item label="Validating">
-                <Input placeholder="I'm the content is being validated" id="validating" />
-            </Form.Item>
-            <Form.Item label="Success">
-                <Input placeholder="I'm the content" id="success" />
-            </Form.Item>
-            <Form.Item label="Warning">
-                <Input placeholder="Warning" id="warning2" />
-            </Form.Item>
-            <Form.Item label="Fail">
-                <Input placeholder="unavailable choice" id="error2" />
-            </Form.Item>
-            <Form.Item label="Error">
-                <Select defaultValue="1">
-                    <Option value="1">Option 1</Option>
-                    <Option value="2">Option 2</Option>
-                </Select>
-            </Form.Item>
-            <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                                </Button>
-            </Form.Item>
-        </Form>
-    </Card>)
+          <Form.Item label="平台工号">
+            {getFieldDecorator('agentId', {
+              rules: [{ required: true, message: 'Please input your agentId!' }], initialValue: '1006'
+            })(<Input name="agentId" />)}
+          </Form.Item>
+          <Form.Item label="坐席分机号">
+            {getFieldDecorator('phoneNum', {
+              rules: [{ required: true, message: 'Please input your phoneNum!' }], initialValue: '310000'
+            })(<Input name="phoneNum" />)}
 
-const ResetAgentSkills = () => (
-    <Card type="inner" title="请求报文">
-        <Form {...formItemLayout}>
-            <Form.Item label="Fail">
-                <Input placeholder="unavailable choice" id="error" />
-            </Form.Item>
-            <Form.Item label="Warning">
-                <Input placeholder="Warning" id="warning" />
-            </Form.Item>
-            <Form.Item label="Validating">
-                <Input placeholder="I'm the content is being validated" id="validating" />
-            </Form.Item>
-            <Form.Item label="Success">
-                <Input placeholder="I'm the content" id="success" />
-            </Form.Item>
-            <Form.Item label="Warning">
-                <Input placeholder="Warning" id="warning2" />
-            </Form.Item>
-            <Form.Item label="Fail">
-                <Input placeholder="unavailable choice" id="error2" />
-            </Form.Item>
-            <Form.Item label="Error">
-                <Select defaultValue="1">
-                    <Option value="1">Option 1</Option>
-                    <Option value="2">Option 2</Option>
-                </Select>
-            </Form.Item>
-            <Form.Item wrapperCol={{ span: 12, offset: 6 }}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                                </Button>
-            </Form.Item>
+          </Form.Item>
+          <Form.Item label={
+            <span>
+              技能队列&nbsp;
+              <Tooltip title='格式为：["1111111","222222"]'>
+                <Icon type="question-circle" />
+              </Tooltip>
+            </span>
+          }>
+            <Tooltip
+              trigger={['focus']}
+              title={'格式为：["1111111","222222"]'}
+              placement="top"
+              overlayClassName="numeric-input"
+            >
+            {getFieldDecorator('skillIds', {})(
+                <Input name="skillIds" placeholder='Please input your skillIds!' />
+                )}
+                </Tooltip>
+          </Form.Item>
+          <Form.Item label="系统编码">
+            {getFieldDecorator('systemCode', {})(<Input name="systemCode" placeholder="Please input your systemCode!" />)}
+          </Form.Item>
+          <Form.Item label="省份id">
+            {getFieldDecorator('provId', {})(<Input name="provId" placeholder="Please input your provId!" />)}
+          </Form.Item>
+          <Form.Item label="强制签入">
+            {getFieldDecorator('isForceLogon', {
+              rules: [{ required: true }], initialValue: "true"
+            })(<Select name="isForceLogon">
+              <Option value="true">true</Option>
+              <Option value="false">false</Option>
+            </Select>)}
+          </Form.Item>
+          <Form.Item label="注册软电话">
+            <Select defaultValue="true">
+              <Option value="true">true</Option>
+              <Option value="false">false</Option>
+            </Select>
+          </Form.Item>
+          <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+            <Button type="primary" htmlType="submit" onClick={this.onClick}>Submit</Button>
+          </Form.Item>
         </Form>
-    </Card>
-)
-export { ResetAgentSkills, Login, };
+      </Card>
+    )
+  }
+}
+
+class ResetAgentSkillsCard extends React.Component {
+  render() {
+    const { getFieldDecorator } = this.props.form;
+    return (
+      <Card type="inner" title="环境设置">
+        <Form {...formItemLayout}>
+          <Form.Item label="统一调度地址">
+            {getFieldDecorator('tyddURL', {
+              rules: [{ required: true, message: 'Please input your tyddURL!' }],
+            })(<Input />)}
+          </Form.Item>
+          <Form.Item label="Warning">
+            <Input placeholder="Warning" />
+          </Form.Item>
+          <Form.Item label="Validating">
+            <Input placeholder="I'm the content is being validated" />
+          </Form.Item>
+          <Form.Item label="Success">
+            <Input placeholder="I'm the content" />
+          </Form.Item>
+          <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+            <Button type="primary" htmlType="submit">Submit</Button>
+          </Form.Item>
+        </Form>
+      </Card>
+    )
+  }
+}
+
+class SetEnvirmentCard extends React.Component {
+  render() {
+    const { getFieldDecorator } = this.props.form;
+    return (
+      <Card type="inner" title="环境设置">
+        <Form {...formItemLayout}>
+          <Form.Item label="统一调度地址">
+            {getFieldDecorator('tyddURL', {
+              rules: [{ required: true, message: 'Please input your tyddURL!' }],
+            })(<Input />)}
+          </Form.Item>
+          <Form.Item label="Warning">
+            <Input placeholder="Warning" />
+          </Form.Item>
+          <Form.Item label="Validating">
+            <Input placeholder="I'm the content is being validated" />
+          </Form.Item>
+          <Form.Item label="Success">
+            <Input placeholder="I'm the content" />
+          </Form.Item>
+          <Form.Item label="Warning">
+            <Input placeholder="Warning" />
+          </Form.Item>
+          <Form.Item label="Fail">
+            <Input placeholder="unavailable choice" />
+          </Form.Item>
+          <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+            <Button type="primary" htmlType="submit">Submit</Button>
+          </Form.Item>
+        </Form>
+      </Card>
+    )
+  }
+}
+
+SetEnvirmentCard = Form.create({ onValuesChange })(SetEnvirmentCard);
+ResetAgentSkillsCard = Form.create({ onValuesChange })(ResetAgentSkillsCard);
+LoginCard = Form.create({ onValuesChange })(LoginCard);
+
+export { ResetAgentSkillsCard, LoginCard, SetEnvirmentCard };
