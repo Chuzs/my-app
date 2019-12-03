@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Card, Form, Input, Select, Tooltip, Icon } from 'antd';
+import fetch from 'isomorphic-fetch';
 const { Option } = Select;
 const formItemLayout = {
   labelCol: {
@@ -12,15 +13,30 @@ const formItemLayout = {
   },
 };
 const onValuesChange = (props, changedValues, allValues) => {
-  for (let key in allValues) {
-    if (allValues[key] === undefined) {
-      allValues[key] = "";
+  props.onChange(removeUndefine(allValues));
+}
+
+const removeUndefine = (data) => {
+  for (let key in data) {
+    if (data[key] === undefined) {
+      data[key] = "";
     }
   }
-  props.onChange(allValues);
+  return data;
 }
 class LoginCard extends React.Component {
-  onClick = () => console.log(this.props);
+  onClick = () => {
+    fetch("http://127.0.0.1:8080/abc", {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/x-www-form-urlencoded, multipart/form-data', //发送类型
+        'Accept': 'application/json' // 通过头指定，获取的数据类型是JSON
+      }),
+      body: JSON.stringify(removeUndefine(this.props.form.getFieldsValue()))
+    }).then((res) => res.json()).then((res) => {
+      console.log(res)
+    })
+  }
   componentDidMount() {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
   }
@@ -38,7 +54,6 @@ class LoginCard extends React.Component {
             {getFieldDecorator('phoneNum', {
               rules: [{ required: true, message: 'Please input your phoneNum!' }], initialValue: '310000'
             })(<Input name="phoneNum" />)}
-
           </Form.Item>
           <Form.Item label={
             <span>
@@ -54,10 +69,10 @@ class LoginCard extends React.Component {
               placement="top"
               overlayClassName="numeric-input"
             >
-            {getFieldDecorator('skillIds', {})(
+              {getFieldDecorator('skillIds', {})(
                 <Input name="skillIds" placeholder='Please input your skillIds!' />
-                )}
-                </Tooltip>
+              )}
+            </Tooltip>
           </Form.Item>
           <Form.Item label="系统编码">
             {getFieldDecorator('systemCode', {})(<Input name="systemCode" placeholder="Please input your systemCode!" />)}
