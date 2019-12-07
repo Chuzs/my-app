@@ -1,12 +1,23 @@
-const onChange = (state = {}, action) => {
+let resText = ''
+const updateText = (state = {}, action) => {
     switch (action.type) {
         case 'REQ':
-            return action.reqText
+            return Object.assign({}, state, {
+                reqText: action.reqText
+            })
         case 'RES':
-            return action.resText
-        default: 
+            return Object.assign({}, state, {
+                resText: appendRes(action.resText)
+            })
+        default:
             return state
     }
 }
 
-export default onChange;
+const appendRes = (value) => {
+    return  resText = value === '' ? '' : resText + value
+}
+
+
+
+export default updateText;

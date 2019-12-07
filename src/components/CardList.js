@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Card, Form, Input, Select, Tooltip, Icon } from 'antd';
 import fetch from 'isomorphic-fetch';
+import moment from 'moment';
 const { Option } = Select;
 const formItemLayout = {
   labelCol: {
@@ -24,17 +25,20 @@ const removeUndefine = (data) => {
   }
   return data;
 }
+const buildRes = (interfaceName, res) => {
+  return moment().format('YYYY-MM-DD HH:mm:ss.SSS') + '    ' + interfaceName + ': '+ JSON.stringify(res, null, 4) + '\n'
+}
 class LoginCard extends React.Component {
   onClick = () => {
     fetch("http://127.0.0.1:8080/abc", {
       method: 'POST',
       headers: new Headers({
-        'Content-Type': 'application/x-www-form-urlencoded, multipart/form-data', //发送类型
+        'Content-Type': 'application/x-www-form-urlencoded', //发送类型
         'Accept': 'application/json' // 通过头指定，获取的数据类型是JSON
       }),
       body: JSON.stringify(removeUndefine(this.props.form.getFieldsValue()))
     }).then((res) => res.json()).then((res) => {
-      console.log(res)
+      this.props.onResponse(buildRes('login', res));
     })
   }
   componentDidMount() {
