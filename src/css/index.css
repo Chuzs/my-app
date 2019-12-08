@@ -6,6 +6,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.lh64 {
+  line-height: 64px;
+}
+.fr {
+  float: right;
+}
+.mr10 {
+  margin-right: 10px;
+}
 
 #header {
   position: fixed;
