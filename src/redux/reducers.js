@@ -18,6 +18,4 @@ const appendRes = (value) => {
     return  resText = value === '' ? '' : resText + value
 }
 
-
-
 export default updateText;
