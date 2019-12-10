@@ -36,6 +36,86 @@ const eventpoll = (props) => {
     }).then((res) => {
         if (res.data.events.length !== 0) {
             props.onResponse(buildRes('eventpoll', res.data));
+            for (var i = 0; i < data.events.length; i++) {
+                if (data.events[i].eventId == '351' && data.events[i].agentState == '5') {
+                    if ($("#status").text() === '通话中') {
+                        stateTimer();
+                    }
+                    $("#status").text('整理态').attr('class', 'btn dropdown-toggle btn-warning');
+                    $('#btnGroup button').attr('disabled', true);
+                    $('#setStateBtn, #transferBtn, #restBtn, #otherWorkBtn, #loginBtn, #autoOtherWorkBtn, #status_btn').attr('disabled', false);
+                    $('#otherWorkBtn').text('取消整理');
+                } else if (data.events[i].eventId == '351' && data.events[i].agentState == '4') {
+                    stateTimer();
+                    if ($("#status").text() !== '待接听') {
+                        $("#status").text('空闲').attr('class', 'btn dropdown-toggle btn-success');
+                        $("#setStateBtn").text('示忙').attr('class', 'btn btn-warning');
+                        $('#otherWorkBtn').text('整理');
+                        $('#btnGroup button').attr('disabled', true);
+                        $('#setStateBtn, #transferBtn, #restBtn, #callOutBtn, #otherWorkBtn, #loginBtn, #autoOtherWorkBtn, #status_btn').attr('disabled', false);
+                    }
+                } else if (data.events[i].eventId == '351' && data.events[i].agentState == '3') {
+                    stateTimer();
+                    $("#status").text('忙碌').attr('class', 'btn dropdown-toggle btn-danger');
+                    $("#setStateBtn").text('示闲').attr('class', 'btn btn-success');
+                } else if (data.events[i].eventId == '351' && data.events[i].agentState == '1') {
+                    $("#loginBtn").text('签出').attr('class', 'btn btn-danger');
+                } else if (data.events[i].eventId == '304') {
+                    stateTimer();
+                    $("#status").text('通话中').attr('class', 'btn dropdown-toggle btn-danger');
+                    $('#btnGroup button').attr('disabled', true);
+                    $("#transferBtn, #restBtn, #setStateBtn, #releaseCallBtn, #muteBtn, #holdBtn, #verifyBtn, #autoOtherWorkBtn,#hangup_btn,#status_btn").attr('disabled', false);
+                    AgentInfo.callId = data.events[i].callId;
+                    CallInfo.callId = data.events[i].callId;
+                    CallInfo.callDirection = data.events[i].callDirection;
+                    CallInfo.callerDigits = data.events[i].callerAddress;
+                    CallInfo.calledDigits = data.events[i].calledAddress;
+                    $("input[name='callId']").val(JSON.stringify(data.events[i].callId));
+                    if (data.events[i].callDirection == '1') {
+                        $('#phoneNum').val(data.events[i].callerAddress);
+                    } else if (data.events[i].callDirection == '2') {
+                        $('#phoneNum').val(data.events[i].calledAddress);
+                    }
+                    // alert(data.events[i].callId);
+                } else if (data.events[i].eventId == '300') {
+                    stateTimer();
+                    $("#status").text('待接听').attr('class', 'btn dropdown-toggle btn-warning');
+                    $('#btnGroup button').attr('disabled', true);
+                    $("#transferBtn, #releaseCallBtn, #setStateBtn, #restBtn,#anwser_btn,#hangup_btn, #status_btn").attr('disabled', false);
+                } else if (data.events[i].eventId == '351' && data.events[i].agentState == '8') {
+                    if (AgentInfo.restTime) {
+                        countdownTimer(AgentInfo.restTime, function () {
+                            setState('8', '0', function (data) {
+                                if (data.result === '0') {
+                                    $('#restBtn').text('休息');
+                                    AgentInfo.restTime = '';
+                                }
+                            });
+                        });
+                    } else {
+                        stateTimer();
+                    }
+                    $("#status").text('休息').attr('class', 'btn dropdown-toggle btn-info');
+                } else if (data.events[i].eventId == '352') {
+                    // if (AgentInfo.statusTimer) {
+                    // 	clearInterval(AgentInfo.statusTimer);
+                    // }
+                    // $('#txtDuration').text('00:00:00');
+                    // $("#status").text('未签入').attr('class', 'btn dropdown-toggle');
+                    init();
+                    $("#loginBtn").text('签入').attr('class', 'btn btn-success');
+                    $("input[name='callId']").val('');
+                } else {
+                    if (data.events[i].eventId == '308') {
+                        queryCallData(function (data) {
+                            if (data.callData) {
+                                var callData = decodeBase64(data.callData);
+
+                            }
+                        })
+                    }
+                }
+            }
         }
     })
 }
@@ -57,7 +137,7 @@ const queryWaitNum = (props) => {
                 clearInterval(ServerInfo.queryWaitNumTimer);
             }
         }
-        props.
+        props.onWaitNumChange(queueSize);
     })
 }
 class Login extends React.Component {
@@ -68,6 +148,9 @@ class Login extends React.Component {
             this.props.onResponse(buildRes('login', res.data));
             if (res.data.result === '0') {
                 ServerInfo.eventpollTimer = setInterval(eventpoll(this.props), 1000);
+                ServerInfo.queryWaitNumTimer = setInterval(queryWaitNum(this.props), 2000);
+                AgentInfo.agentId = this.props.form.getFieldsValue().agentId;
+                AgentInfo.systemCode = this.props.form.getFieldsValue().systemCode;
             }
         })
     }
