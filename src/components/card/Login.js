@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, Card, Form, Input, Select, Tooltip, Icon } from 'antd';
-import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 import moment from 'moment';
+import { AgentInfo, ServerInfo } from '../global';
 const { Option } = Select;
 const formItemLayout = {
     labelCol: {
@@ -28,17 +29,46 @@ const removeUndefine = (data) => {
 const buildRes = (interfaceName, res) => {
     return moment().format('YYYY-MM-DD HH:mm:ss.SSS') + '    ' + interfaceName + ': ' + JSON.stringify(res, null, 4) + '\n'
 }
+const eventpoll = (props) => {
+    axios.post("http://192.168.88.8:8080/ccacs/ws/event/poll", '{}', {
+        withCredentials: true,
+        timeout: 11000,
+    }).then((res) => {
+        if (res.data.events.length !== 0) {
+            props.onResponse(buildRes('eventpoll', res.data));
+        }
+    })
+}
+const queryWaitNum = (props) => {
+    let params = {
+        agentId: AgentInfo.agentId,
+        systemCode: AgentInfo.systemCode
+    }
+    axios.post("http://192.168.88.8:8080/ccacs/ws/query/queryacdstatus", JSON.stringify(params), {
+        withCredentials: true,
+    }).then((res) => {
+        let queueSize = 0;
+        if (res.data.result === '0') {
+            for (let i in res.data.hwAcdInfos) {
+                queueSize += res.data.hwAcdInfos[i].queueSize;
+            }
+        } else if (res.data.result === '150001') {
+            if (ServerInfo.queryWaitNumTimer) {
+                clearInterval(ServerInfo.queryWaitNumTimer);
+            }
+        }
+        props.
+    })
+}
 class Login extends React.Component {
     onClick = () => {
-        fetch("http://127.0.0.1:8080/ccacs/ws/agent/login", {
-            method: 'POST',
-            headers: new Headers({
-                'Content-Type': 'application/x-www-form-urlencoded', //发送类型
-                'Accept': 'application/json' // 通过头指定，获取的数据类型是JSON
-            }),
-            body: JSON.stringify(removeUndefine(this.props.form.getFieldsValue()))
-        }).then((res) => res.json()).then((res) => {
-            this.props.onResponse(buildRes('login', res));
+        axios.post("http://192.168.88.8:8080/ccacs/ws/agent/login", JSON.stringify(removeUndefine(this.props.form.getFieldsValue())), {
+            withCredentials: true,
+        }).then((res) => {
+            this.props.onResponse(buildRes('login', res.data));
+            if (res.data.result === '0') {
+                ServerInfo.eventpollTimer = setInterval(eventpoll(this.props), 1000);
+            }
         })
     }
     componentDidMount() {

@@ -1,1 +1,163 @@
+/* 扩展ant design pro按钮组件颜色 */
+.ant-btn.btn-dust {
+    background-color: #F5222D;
+    border-color: #F5222D;
+    color: #fff;
+}
 
+.ant-btn.btn-dust:hover,
+.ant-btn.btn-dust:focus {
+    background-color: #ff4d4f;
+    border-color: #ff4d4f;
+    color: #fff;
+}
+
+.ant-btn.btn-dust:active,
+.ant-btn.btn-dust.active {
+    background-color: #cf1322;
+    border-color: #cf1322;
+    color: #fff;
+}
+
+.ant-btn.btn-volcano {
+    background-color: #FA541C;
+    border-color: #FA541C;
+    color: #fff;
+
+}
+
+.ant-btn.btn-volcano:hover,
+.ant-btn.btn-volcano:focus {
+    background-color: #ff7a45;
+    border-color: #ff7a45;
+    color: #fff;
+}
+
+.ant-btn.btn-volcano:active,
+.ant-btn.btn-volcano.active {
+    background-color: #d4380d;
+    border-color: #d4380d;
+    color: #fff;
+}
+
+.ant-btn.btn-sunset {
+    background-color: #FAAD14;
+    border-color: #FAAD14;
+    color: #fff;
+}
+
+.ant-btn.btn-sunset:hover,
+.ant-btn.btn-sunset:focus {
+    background-color: #ffc53d;
+    border-color: #ffc53d;
+    color: #fff;
+}
+
+.ant-btn.btn-sunset:active,
+.ant-btn.btn-sunset.active {
+    background-color: #d48806;
+    border-color: #d48806;
+    color: #fff;
+
+}
+
+.ant-btn.btn-cyan {
+    background-color: #13C2C2;
+    border-color: #13C2C2;
+    color: #fff;
+}
+
+.ant-btn.btn-cyan:hover,
+.ant-btn.btn-cyan:focus {
+    background-color: #36cfc9;
+    border-color: #36cfc9;
+    color: #fff;
+}
+
+.ant-btn.btn-cyan:active,
+.ant-btn.btn-cyan.active {
+    background-color: #08979c;
+    border-color: #08979c;
+    color: #fff;
+}
+
+.ant-btn.btn-green {
+    background-color: #52C41A;
+    border-color: #52C41A;
+    color: #fff;
+
+}
+
+.ant-btn.btn-green:hover,
+.ant-btn.btn-green:focus {
+    background-color: #73d13d;
+    border-color: #73d13d;
+    color: #fff;
+}
+
+.ant-btn.btn-green:active,
+.ant-btn.btn-green.active {
+    background-color: #389e0d;
+    border-color: #389e0d;
+    color: #fff;
+}
+
+.ant-btn.btn-daybreak {
+    background-color: #1890FF;
+    border-color: #1890FF;
+    color: #fff;
+}
+
+.ant-btn.btn-daybreak:hover,
+.ant-btn.btn-daybreak:focus {
+    background-color: #096dd9;
+    border-color: #096dd9;
+    color: #fff;
+}
+
+.ant-btn.btn-daybreak:active,
+.ant-btn.btn-daybreak.active {
+    background-color: #40a9ff;
+    border-color: #40a9ff;
+    color: #fff;
+}
+
+.ant-btn.btn-geekblue {
+    background-color: #2F54EB;
+    border-color: #2F54EB;
+    color: #fff;
+}
+
+.ant-btn.btn-geekblue:hover,
+.ant-btn.btn-geekblue:focus {
+    background-color: #1d39c4;
+    border-color: #1d39c4;
+    color: #fff;
+}
+
+.ant-btn.btn-geekblue:active,
+.ant-btn.btn-geekblue.active {
+    background-color: #597ef7;
+    border-color: #597ef7;
+    color: #fff;
+}
+
+.ant-btn.btn-purple {
+    background-color: #722ED1;
+    border-color: #722ED1;
+    color: #fff;
+}
+
+.ant-btn.btn-purple:hover,
+.ant-btn.btn-purple:focus {
+    background-color: #9254de;
+    border-color: #9254de;
+    color: #fff;
+}
+
+.ant-btn.btn-purple:active,
+.ant-btn.btn-purple.active {
+    background-color: #531dab;
+    border-color: #531dab;
+    color: #fff;
+}

@@ -1,5 +1,5 @@
 let resText = ''
-const updateText = (state = {}, action) => {
+const updateText = (state = {waitNum: 0}, action) => {
     switch (action.type) {
         case 'REQ':
             return Object.assign({}, state, {
@@ -8,6 +8,10 @@ const updateText = (state = {}, action) => {
         case 'RES':
             return Object.assign({}, state, {
                 resText: appendRes(action.resText)
+            })
+        case 'WAIT':
+            return Object.assign({}, state, {
+                waitNum: action.waitNum
             })
         default:
             return state
