@@ -1,7 +1,5 @@
 import React from 'react';
 import { Row, Col, Button } from 'antd';
-import { connect } from 'react-redux';
-import { updateWaitNum } from '../redux/actions'
 import RestModal from './modal/rest'
 
 class Header extends React.Component {
@@ -23,8 +21,8 @@ class Header extends React.Component {
           </Col>
           <Col xs={0} sm={0} md={0} lg={18} xl={20} xxl={20} className="lh64">
             <Button.Group className="lh64 mr10">
-              <Button>未签入</Button>
-              <Button>00:00:00</Button>
+              <Button className={this.props.statusBtnClass}>{this.props.statusText}</Button>
+              <Button>{this.props.time}</Button>
             </Button.Group>
             <Button.Group className="lh64">
               <Button>{this.props.waitNum}</Button>
@@ -53,22 +51,5 @@ class Header extends React.Component {
   }
 
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onWaitNumChange: value => {
-      dispatch(updateWaitNum(value))
-    }
-  }
-}
-
-const mapStateToProps = state => ({
-  waitNum: state.waitNum
-})
-
-Header = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Header)
 
 export default Header;

@@ -3,18 +3,58 @@ import Header from './Header';
 import Sider from './Sider';
 import Content from './Content';
 import { BrowserRouter as Router } from "react-router-dom";
+import { connect } from 'react-redux';
+import {updateReqText, updateResText, updateStatusBtn, updateWaitNum, updateTime} from '../redux/actions';
 
-const App = () => {
-  return (
-    <Router>
-      <Header></Header>
-      <div className="main-wrapper">
-        <Sider></Sider>
-        <Content></Content>
-      </div>
-    </Router>
-  );
+
+
+class App extends React.Component {
+  render () {
+    return (
+      <Router>
+        <Header {...this.props}></Header>
+        <div className="main-wrapper">
+          <Sider></Sider>
+          <Content {...this.props}></Content>
+        </div>
+      </Router>
+    );
+  }
 }
+  
+const mapDispatchToProps = dispatch => {
+  return {
+    onChange: value => {
+      dispatch(updateReqText(value))
+    },
+    onResponse: value => {
+      dispatch(updateResText(value))
+    },
+    onWaitNumChange: value => {
+      dispatch(updateWaitNum(value))
+    },
+    onStatusTextChange: value => {
+      dispatch(updateStatusBtn(value))
+    },
+    onTimeChange: value => {
+      dispatch(updateTime(value))
+    }
+  }
+}
+
+const mapStateToProps = state => ({
+  reqText: state.reqText,
+  resText: state.resText,
+  waitNum: state.waitNum,
+  statusText: state.statusText,
+  statusBtnClass: state.statusBtnClass,
+  time: state.time
+})
+
+App = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
 
 export default App;
 

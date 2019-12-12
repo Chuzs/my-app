@@ -16,9 +16,15 @@ export const updateWaitNum = waitNum => {
         waitNum
     }
 }
-export const updateStatusBtn = status => {
+export const updateStatusBtn = statusBtn => {
     return {
         type: 'STATUS',
-        status
+        statusBtn
+    }
+}
+export const updateTime = time => {
+    return {
+        type: 'TIME',
+        time
     }
 }

@@ -1,3 +1,4 @@
+import moment from 'moment';
 export const ServerInfo = {
     tyddUrl: "KEY_TYDD_URL",
 	domin: "KEY_DOMIN",
@@ -26,3 +27,33 @@ export const CallInfo = {
 	skillName: '',
 	skillId: '',
 }
+
+export const statusTimer = (props) => {
+	let startTime = currentTime();
+	if (AgentInfo.statusTimer) {
+		clearInterval(AgentInfo.statusTimer);
+	}
+	AgentInfo.statusTimer = setInterval(function () {
+		let duration = moment().diff(moment(startTime), 'seconds');
+		props.onTimeChange(formatDuration(duration));
+	}, 1000);
+}
+
+export const currentTime = () => {
+	return moment().format('YYYY-MM-DD HH:mm:ss.SSS');
+}
+
+export const formatDuration = duration => {
+	if (isNumber(duration) && duration >= 0) {
+		const f = n => n < 10 ? '0' + n : n;
+		let hour = Math.floor(duration / 3600);
+		let minute = Math.floor((duration - hour * 3600) / 60);
+		let second = Math.floor(duration - hour * 3600 - minute * 60);
+		return f(hour) + ':' + f(minute) + ':' + f(second);
+	} else {
+		return '00:00:00';
+	}
+}
+
+export const isObjectLike = value => !!value && typeof value == 'object';
+export const isNumber = value => typeof value == 'number' || (isObjectLike(value) && Object.prototype.toString.call(value) === '[object Number]');

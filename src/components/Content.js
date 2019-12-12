@@ -2,8 +2,6 @@ import React from 'react';
 import { Button, Card, Row, Col, Input } from 'antd';
 import { Switch, Route } from "react-router-dom";
 import { LoginCard, ResetAgentSkillsCard, SetEnvirmentCard } from './card'
-import { connect } from 'react-redux';
-import { updateReqText, updateResText } from '../redux/actions';
 const { TextArea } = Input;
 class Content extends React.Component {
   onClick = () => {
@@ -18,7 +16,7 @@ class Content extends React.Component {
           <Col xs={0} sm={0} md={0} lg={9} xl={10} xxl={10} offset={1}>
             <Switch>
               <Route path="/login" >
-                <LoginCard onChange={this.props.onChange} onResponse={this.props.onResponse} />
+                <LoginCard {...this.props} />
               </Route>
               <Route path="/resetAgentSkills">
                 <ResetAgentSkillsCard onChange={this.props.onChange} onResponse={this.props.onResponse} />
@@ -41,26 +39,5 @@ class Content extends React.Component {
     )
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onChange: value => {
-      dispatch(updateReqText(value))
-    },
-    onResponse: value => {
-      dispatch(updateResText(value))
-    }
-  }
-}
-
-const mapStateToProps = state => ({
-  reqText: state.reqText,
-  resText: state.resText
-})
-
-Content = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Content)
 
 export default Content;
