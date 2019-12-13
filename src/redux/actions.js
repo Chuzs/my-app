@@ -28,3 +28,31 @@ export const updateTime = time => {
         time
     }
 }
+
+export const updateSetStatusBtn = setStatusBtn => {
+    return {
+        type: 'SET',
+        setStatusBtn
+    }
+}
+
+export const updateRestBtn = restBtn => {
+    return {
+        type: 'REST',
+        restBtn
+    }
+}
+
+export const updateLoginBtn = loginBtn => {
+    return {
+        type: 'LOGIN',
+        loginBtn
+    }
+}
+
+export const updateOtherworkBtn = otherworkBtn => {
+    return {
+        type: 'OTHER',
+        otherworkBtn
+    }
+}

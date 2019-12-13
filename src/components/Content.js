@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Row, Col, Input, Tabs } from 'antd';
+import { Button, Row, Col, Input, Tabs } from 'antd';
 import { Switch, Route } from "react-router-dom";
 import { LoginCard, ResetAgentSkillsCard, SetEnvirmentCard } from './card'
 const { TabPane } = Tabs;
@@ -14,12 +14,12 @@ class Content extends React.Component {
   onChange = (key) => {
     if (key === '2') {
       this.setState({
-          operactions: <Button onClick={this.onClick}>清除</Button>
-        })
+        operactions: <Button onClick={this.onClick}>清除</Button>
+      })
     } else {
       this.setState({
-          operactions: ""
-        })
+        operactions: ""
+      })
     }
   }
   render() {
@@ -44,20 +44,12 @@ class Content extends React.Component {
           <Col xs={0} sm={0} md={0} lg={9} xl={11} xxl={11} offset={1}>
             <Tabs defaultActiveKey="1" tabBarExtraContent={this.state.operactions} onChange={this.onChange}>
               <TabPane tab="请求报文" key="1">
-                {/* <Card type="inner" title="请求报文" id="reqTextCard"> */}
-                <TextArea style={{ "resize": "none" }} autoSize={{ minRows: 1 }} value={reqText}></TextArea>
-                {/* </Card> */}
+                <TextArea style={{ "resize": "none", "maxHeight": "calc(100vh - 300px)", "border": "none" }} autoSize={{ minRows: 1 }} value={reqText}></TextArea>
               </TabPane>
               <TabPane tab="响应报文" key="2">
-                <TextArea style={{ "resize": "none", "maxHeight": "calc(100vh - 300px)", "minHeight": "calc(100vh - 400px)" }} autoSize="true" value={resText}></TextArea>
+                <TextArea style={{ "resize": "none", "maxHeight": "calc(100vh - 300px)", "border": "none" }} autoSize="true" value={resText}></TextArea>
               </TabPane>
             </Tabs>
-            {/* <Card type="inner" title="响应报文" id="resTextCard" extra={<Button onClick={this.onClick}>清除</Button>} >
-              <TextArea style={{ "border": "none", "resize": "none","max-height": "calc(100vh - 300px)", "min-height": "calc(100vh - 400px)" }} autoSize="true" value={ resText } disabled></TextArea>
-            </Card> */}
-            {/* <Card type="inner" title="请求报文" id="reqTextCard">
-              <TextArea style={{ "border": "none", "resize": "none" }} autoSize={{ minRows: 1 }} value={ reqText }></TextArea>
-            </Card> */}
           </Col>
         </Row>
       </Col>

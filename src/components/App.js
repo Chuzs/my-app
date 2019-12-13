@@ -4,12 +4,12 @@ import Sider from './Sider';
 import Content from './Content';
 import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from 'react-redux';
-import {updateReqText, updateResText, updateStatusBtn, updateWaitNum, updateTime} from '../redux/actions';
+import { updateReqText, updateResText, updateStatusBtn, updateWaitNum, updateTime, updateLoginBtn, updateRestBtn, updateOtherworkBtn, updateSetStatusBtn } from '../redux/actions';
 
 
 
 class App extends React.Component {
-  render () {
+  render() {
     return (
       <Router>
         <Header {...this.props}></Header>
@@ -21,7 +21,7 @@ class App extends React.Component {
     );
   }
 }
-  
+
 const mapDispatchToProps = dispatch => {
   return {
     onChange: value => {
@@ -38,6 +38,18 @@ const mapDispatchToProps = dispatch => {
     },
     onTimeChange: value => {
       dispatch(updateTime(value))
+    },
+    onRestChange: value => {
+      dispatch(updateRestBtn(value))
+    },
+    onOtherworkChange: value => {
+      dispatch(updateOtherworkBtn(value))
+    },
+    onLoginChange: value => {
+      dispatch(updateLoginBtn(value));
+    },
+    onSetStatusChange: value => {
+      dispatch(updateSetStatusBtn(value))
     }
   }
 }
@@ -48,7 +60,13 @@ const mapStateToProps = state => ({
   waitNum: state.waitNum,
   statusText: state.statusText,
   statusBtnClass: state.statusBtnClass,
-  time: state.time
+  time: state.time,
+  setStatusBtnClass: state.setStatusBtnClass,
+  setStatusBtnText: state.setStatusBtnText,
+  restBtnText: state.restBtnText,
+  otherworkBtnText: state.otherworkBtnText,
+  loginBtnText: state.loginBtnText,
+  loginBtnClass: state.loginBtnClass
 })
 
 App = connect(

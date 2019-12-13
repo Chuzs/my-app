@@ -161,3 +161,7 @@
     border-color: #531dab;
     color: #fff;
 }
+
+.ant-tabs-tabpane .ant-input:focus {
+    box-shadow: none;
+}

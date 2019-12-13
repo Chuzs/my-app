@@ -29,19 +29,22 @@ class Header extends React.Component {
               <Button>人在等待</Button>
             </Button.Group>
             <Button.Group className="lh64 fr mr10">
-              <Button className="btn-green">签入</Button>
+              <Button className="btn-sunset">{this.props.otherworkBtnText}</Button>
+            </Button.Group>
+            <Button.Group className="lh64 fr mr10">
+              <Button className={this.props.loginBtnClass}>{this.props.loginBtnText}</Button>
             </Button.Group>
             <Button.Group className="lh64 fr mr10">
               <Button>整理态</Button>
             </Button.Group>
             <Button.Group className="lh64 fr mr10">
-              <Button className="btn-sunset">示忙</Button>
+              <Button className={this.props.setStatusBtnClass}>{this.props.setStatusBtnText}</Button>
               <Button className="btn-geekblue">综合接续</Button>
-              <Button className="btn-geekblue">密码验证</Button>
+              {/* <Button className="btn-geekblue">密码验证</Button> */}
               <Button className="btn-dust">结束会话</Button>
-              <Button className="btn-geekblue" onClick={this.rest}>休息</Button>
-              <Button className="btn-geekblue" >外呼</Button>
-              <Button className="btn-geekblue" >保持</Button>
+              <Button className="btn-cyan" onClick={this.rest}>{this.props.restBtnText}</Button>
+              <Button className="btn-daybreak">外呼</Button>
+              <Button className="btn-purple">保持</Button>
             </Button.Group>
           </Col>
         </Row>
