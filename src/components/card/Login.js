@@ -212,7 +212,7 @@ class Login extends React.Component {
                             <Option value="false">false</Option>
                         </Select>
                     </Form.Item>
-                    <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
+                    <Form.Item wrapperCol={{ span: 12, offset: 10 }}>
                         <Button type="primary" htmlType="submit" onClick={this.onClick}>Submit</Button>
                     </Form.Item>
                 </Form>

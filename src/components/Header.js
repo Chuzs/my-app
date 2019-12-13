@@ -16,10 +16,10 @@ class Header extends React.Component {
     return (
       <header id="header" className="clearfix">
         <Row>
-          <Col xs={24} sm={24} md={24} lg={6} xl={4} xxl={4}>
+          <Col xs={24} sm={24} md={24} lg={6} xl={4} xxl={3}>
             <a id="logo" href="/"> 统一调度Demo</a>
           </Col>
-          <Col xs={0} sm={0} md={0} lg={18} xl={20} xxl={20} className="lh64">
+          <Col xs={0} sm={0} md={0} lg={18} xl={20} xxl={21} className="lh64">
             <Button.Group className="lh64 mr10">
               <Button className={this.props.statusBtnClass}>{this.props.statusText}</Button>
               <Button>{this.props.time}</Button>
