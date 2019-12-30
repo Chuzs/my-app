@@ -14,7 +14,6 @@ class RestModal extends React.Component {
     })
   }
   onChange = e => {
-    console.log('radio checked', e.target.value);
     this.setState({
       value: e.target.value,
     });
@@ -39,7 +38,7 @@ class RestModal extends React.Component {
       display: 'block',
       height: '30px',
       lineHeight: '30px',
-      marginLeft: '140px'
+      marginLeft: '135px'
     };
     return (
       <Modal
