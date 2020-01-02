@@ -63,3 +63,10 @@ export const updateRestVisible = restVisible => {
         restVisible
     }
 }
+
+export const updateReKey = reKey => {
+    return {
+        type: 'REKEY',
+        reKey
+    }
+}

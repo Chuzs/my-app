@@ -8,20 +8,25 @@ class Content extends React.Component {
   state = {
     operactions: ''
   }
-  onClick = () => {
+  clear = () => {
     this.props.onResponse('');
   }
-  onChange = (key) => {
-    if (key === '2') {
+  componentWillReceiveProps(props){
+    if (props.reKey === '2') {
       this.setState({
-        operactions: <Button onClick={this.onClick}>清除</Button>
+        operactions: <Button onClick={this.clear}>清除</Button>
       })
-    } else {
+    } else if(props.reKey === '1') {
       this.setState({
         operactions: ""
       })
     }
   }
+  
+  onClick = (key) => {
+    this.props.onReKeyChange(key);
+  }
+
   render() {
     const reqText = JSON.stringify(this.props.reqText, null, 4);
     const resText = this.props.resText;
@@ -42,7 +47,7 @@ class Content extends React.Component {
             </Switch>
           </Col>
           <Col xs={0} sm={0} md={0} lg={9} xl={11} xxl={11} offset={1}>
-            <Tabs defaultActiveKey="1" tabBarExtraContent={this.state.operactions} onChange={this.onChange}>
+            <Tabs activeKey={this.props.reKey} tabBarExtraContent={this.state.operactions} onTabClick={this.onClick}>
               <TabPane tab="请求报文" key="1">
                 <TextArea style={{ "resize": "none", "maxHeight": "calc(100vh - 300px)", "border": "none" }} autoSize={{ minRows: 1 }} value={reqText}></TextArea>
               </TabPane>

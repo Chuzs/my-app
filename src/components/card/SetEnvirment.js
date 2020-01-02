@@ -96,7 +96,7 @@ class SetEnvirment extends React.Component {
         </TabPane>
         <TabPane tab="ZUC配置" key="3">
           <Form {...formItemLayout}>
-            <Form.Item label="zucUrl">
+            <Form.Item label="ZUC URL">
               {getFieldDecorator('zucUrl', {
                 // rules: [{ required: true, message: 'Please input your systemCode!' }],
               })(<Input placeholder="Please input your zucUrl!" />)}

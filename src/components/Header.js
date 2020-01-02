@@ -4,9 +4,6 @@ import axios from 'axios';
 import RestModal from './modal/rest'
 
 class Header extends React.Component {
-  // state = {
-  //   restVisible: false
-  // }
   toggleRestModal = () => {
     if(this.props.restVisible){
       this.props.onRestVisibleChange(false);

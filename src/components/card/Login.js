@@ -171,6 +171,7 @@ const queryWaitNum = (props) => {
 }
 class Login extends React.Component {
   onClick = () => {
+    this.props.onReKeyChange('2');
     axios.post("http://192.168.88.8:8080/ccacs/ws/agent/login", JSON.stringify(removeUndefine(this.props.form.getFieldsValue())), {
       withCredentials: true,
     }).then((res) => {
@@ -181,7 +182,9 @@ class Login extends React.Component {
         AgentInfo.agentId = this.props.form.getFieldsValue().agentId;
         AgentInfo.systemCode = this.props.form.getFieldsValue().systemCode;
       }
-    })
+    }).catch(error => {
+      this.props.onResponse(buildRes('login', {"message": error.message}));
+    }) 
   }
   componentDidMount() {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());

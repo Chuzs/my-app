@@ -10,6 +10,8 @@ const initState = {
     loginBtnText: '签入',
     loginBtnClass: 'btn-green',
     restVisible: false,
+    reKey: '1',
+
 }
 const updateText = (state = initState, action) => {
     switch (action.type) {
@@ -55,6 +57,10 @@ const updateText = (state = initState, action) => {
         case 'RESTVISIBLE':
             return Object.assign({}, state, {
                 restVisible: action.restVisible
+            })
+        case 'REKEY':
+            return Object.assign({}, state, {
+                reKey: action.reKey
             })
         default:
             return state

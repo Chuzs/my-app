@@ -4,7 +4,7 @@ import Sider from './Sider';
 import Content from './Content';
 import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from 'react-redux';
-import { updateReqText, updateResText, updateStatusBtn, updateWaitNum, updateTime, updateLoginBtn, updateRestBtn, updateOtherworkBtn, updateSetStatusBtn, updateRestVisible } from '../redux/actions';
+import { updateReqText, updateResText, updateStatusBtn, updateWaitNum, updateTime, updateLoginBtn, updateRestBtn, updateOtherworkBtn, updateSetStatusBtn, updateRestVisible, updateReKey } from '../redux/actions';
 
 
 
@@ -25,34 +25,37 @@ class App extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     onChange: value => {
-      dispatch(updateReqText(value))
+      dispatch(updateReqText(value));
     },
     onResponse: value => {
-      dispatch(updateResText(value))
+      dispatch(updateResText(value));
     },
     onWaitNumChange: value => {
-      dispatch(updateWaitNum(value))
+      dispatch(updateWaitNum(value));
     },
     onStatusTextChange: value => {
-      dispatch(updateStatusBtn(value))
+      dispatch(updateStatusBtn(value));
     },
     onTimeChange: value => {
-      dispatch(updateTime(value))
+      dispatch(updateTime(value));
     },
     onRestChange: value => {
-      dispatch(updateRestBtn(value))
+      dispatch(updateRestBtn(value));
     },
     onOtherworkChange: value => {
-      dispatch(updateOtherworkBtn(value))
+      dispatch(updateOtherworkBtn(value));
     },
     onLoginChange: value => {
       dispatch(updateLoginBtn(value));
     },
     onSetStatusChange: value => {
-      dispatch(updateSetStatusBtn(value))
+      dispatch(updateSetStatusBtn(value));
     },
     onRestVisibleChange: value => {
-      dispatch(updateRestVisible(value))
+      dispatch(updateRestVisible(value));
+    },
+    onReKeyChange: value => {
+      dispatch(updateReKey(value));
     }
   }
 }
@@ -71,6 +74,7 @@ const mapStateToProps = state => ({
   loginBtnText: state.loginBtnText,
   loginBtnClass: state.loginBtnClass,
   restVisible: state.restVisible,
+  reKey: state.reKey,
 })
 
 App = connect(

@@ -9,6 +9,7 @@ class Sider extends React.Component {
       <Col className='main-menu' xs={24} sm={24} md={24} lg={6} xl={4} xxl={3}>
         <section className="main-menu-inner">
           <Menu mode="inline" defaultOpenKeys={['sub1']} defaultSelectedKeys={['1']}>
+            <Menu.Item key="env"><Link to="/"><Icon type="notification" />环境设置</Link></Menu.Item>
             <SubMenu
               key="sub1"
               title={
