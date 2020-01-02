@@ -4,13 +4,15 @@ import axios from 'axios';
 import RestModal from './modal/rest'
 
 class Header extends React.Component {
-  state = {
-    restVisible: false
-  }
-  showRestModal = () => {
-    this.setState({
-      restVisible: true
-    })
+  // state = {
+  //   restVisible: false
+  // }
+  toggleRestModal = () => {
+    if(this.props.restVisible){
+      this.props.onRestVisibleChange(false);
+    } else {
+      this.props.onRestVisibleChange(true);
+    }
   }
   rest = () => {
     axios.post()
@@ -46,13 +48,13 @@ class Header extends React.Component {
               <Button className="btn-geekblue">综合接续</Button>
               {/* <Button className="btn-geekblue">密码验证</Button> */}
               <Button className="btn-dust">结束会话</Button>
-              <Button className="btn-cyan" onClick={this.showRestModal}>{this.props.restBtnText}</Button>
+              <Button className="btn-cyan" onClick={this.toggleRestModal}>{this.props.restBtnText}</Button>
               <Button className="btn-daybreak">外呼</Button>
               <Button className="btn-purple">保持</Button>
             </Button.Group>
           </Col>
         </Row>
-        <RestModal visible={this.state.restVisible}></RestModal>
+        <RestModal {...this.props}></RestModal>
       </header>
     )
   }

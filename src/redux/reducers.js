@@ -8,7 +8,8 @@ const initState = {
     restBtnText: '休息',
     otherworkBtnText: '整理',
     loginBtnText: '签入',
-    loginBtnClass: 'btn-green'
+    loginBtnClass: 'btn-green',
+    restVisible: false,
 }
 const updateText = (state = initState, action) => {
     switch (action.type) {
@@ -50,6 +51,10 @@ const updateText = (state = initState, action) => {
         case 'TIME':
             return Object.assign({}, state, {
                 time: action.time,
+            })
+        case 'RESTVISIBLE':
+            return Object.assign({}, state, {
+                restVisible: action.restVisible
             })
         default:
             return state

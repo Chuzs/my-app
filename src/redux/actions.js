@@ -56,3 +56,10 @@ export const updateOtherworkBtn = otherworkBtn => {
         otherworkBtn
     }
 }
+
+export const updateRestVisible = restVisible => {
+    return {
+        type: 'RESTVISIBLE',
+        restVisible
+    }
+}

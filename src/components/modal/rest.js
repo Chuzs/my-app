@@ -4,15 +4,9 @@ import { Modal, Radio } from 'antd';
 class RestModal extends React.Component {
 
   state = {
-    visible: false,
     value: 30
   };
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState({
-      visible: nextProps.visible,
-    })
-  }
   onChange = e => {
     this.setState({
       value: e.target.value,
@@ -20,17 +14,11 @@ class RestModal extends React.Component {
   };
 
   handleOk = e => {
-    console.log(this.state.value);
-    this.setState({
-      visible: false,
-    });
+      this.props.onRestVisibleChange(false);
   };
 
   handleCancel = e => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
+    this.props.onRestVisibleChange(false);
   };
 
   render() {
@@ -43,7 +31,7 @@ class RestModal extends React.Component {
     return (
       <Modal
         title="休息"
-        visible={this.state.visible}
+        visible={this.props.restVisible}
         onOk={this.handleOk}
         onCancel={this.handleCancel}
         width="400px"
