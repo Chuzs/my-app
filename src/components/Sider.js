@@ -11,7 +11,7 @@ class Sider extends React.Component {
           <Menu mode="inline" defaultOpenKeys={['sub1']} defaultSelectedKeys={['1']}>
             <Menu.Item key="env"><Link to="/"><Icon type="notification" />环境设置</Link></Menu.Item>
             <SubMenu
-              key="sub1"
+              key="ccacs"
               title={
                 <span>
                   <Icon type="user" />
@@ -27,7 +27,7 @@ class Sider extends React.Component {
               <Menu.Item key="4">option4</Menu.Item>
             </SubMenu>
             <SubMenu
-              key="sub2"
+              key="ccbms"
               title={
                 <span>
                   <Icon type="laptop" />
@@ -42,7 +42,7 @@ class Sider extends React.Component {
               <Menu.Item key="8">option8</Menu.Item>
             </SubMenu>
             <SubMenu
-              key="sub3"
+              key="ccbcs"
               title={
                 <span>
                   <Icon type="notification" />

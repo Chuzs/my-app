@@ -3,7 +3,7 @@ import { Modal, Radio, Input } from 'antd'
 class callOutModal extends React.Component {
     state = { visible: false };
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState({
             visible: nextProps.visible,
         })

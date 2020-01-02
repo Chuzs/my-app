@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Row, Col, Input, Tabs } from 'antd';
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import { LoginCard, ResetAgentSkillsCard, SetEnvirmentCard } from './card'
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -11,7 +11,7 @@ class Content extends React.Component {
   clear = () => {
     this.props.onResponse('');
   }
-  componentWillReceiveProps(props){
+  UNSAFE_componentWillReceiveProps(props){
     if (props.reKey === '2') {
       this.setState({
         operactions: <Button onClick={this.clear}>清除</Button>
@@ -24,6 +24,8 @@ class Content extends React.Component {
   }
   
   onClick = (key) => {
+    // let location = useLocation()
+    // console.log(location)
     this.props.onReKeyChange(key);
   }
 
