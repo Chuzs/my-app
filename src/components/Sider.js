@@ -5,11 +5,12 @@ const { SubMenu } = Menu;
 
 class Sider extends React.Component {
   render() {
+    let pathname = window.location.pathname.split('/');
     return (
       <Col className='main-menu' xs={24} sm={24} md={24} lg={6} xl={4} xxl={3}>
         <section className="main-menu-inner">
-          <Menu mode="inline" defaultOpenKeys={['sub1']} defaultSelectedKeys={['1']}>
-            <Menu.Item key="env"><Link to="/"><Icon type="notification" />环境设置</Link></Menu.Item>
+          <Menu mode="inline" defaultOpenKeys={[pathname[1]]} defaultSelectedKeys={[pathname[2] ? pathname[2] : "/"]}>
+            <Menu.Item key="/"><Link to="/"><Icon type="notification" />环境设置</Link></Menu.Item>
             <SubMenu
               key="ccacs"
               title={
@@ -19,10 +20,10 @@ class Sider extends React.Component {
                 </span>
               }
             >
-              <Menu.Item key="1">
-                <Link to="/login">签入</Link>
+              <Menu.Item key="login">
+                <Link to="/ccacs/login">签入</Link>
               </Menu.Item>
-              <Menu.Item key="2"><Link to="/resetAgentSkills">重设坐席技能</Link></Menu.Item>
+              <Menu.Item key="resetAgentSkills"><Link to="/ccacs/resetAgentSkills">重设坐席技能</Link></Menu.Item>
               <Menu.Item key="3">option3</Menu.Item>
               <Menu.Item key="4">option4</Menu.Item>
             </SubMenu>

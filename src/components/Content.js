@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Row, Col, Input, Tabs } from 'antd';
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { LoginCard, ResetAgentSkillsCard, SetEnvirmentCard } from './card'
 const { TabPane } = Tabs;
 const { TextArea } = Input;
@@ -24,8 +24,6 @@ class Content extends React.Component {
   }
   
   onClick = (key) => {
-    // let location = useLocation()
-    // console.log(location)
     this.props.onReKeyChange(key);
   }
 
@@ -37,10 +35,10 @@ class Content extends React.Component {
         <Row>
           <Col xs={0} sm={0} md={0} lg={9} xl={10} xxl={10} offset={1}>
             <Switch>
-              <Route path="/login" >
+              <Route path="/ccacs/login" >
                 <LoginCard {...this.props} />
               </Route>
-              <Route path="/resetAgentSkills">
+              <Route path="/ccacs/resetAgentSkills">
                 <ResetAgentSkillsCard onChange={this.props.onChange} onResponse={this.props.onResponse} />
               </Route>
               <Route path="/">
