@@ -2,31 +2,10 @@ import React from 'react';
 import { Button, Form, Input, Select, Tooltip, Icon, Tabs } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
-import { AgentInfo, ServerInfo, CallInfo, statusTimer } from '../global';
+import { AgentInfo, ServerInfo, CallInfo, statusTimer, onValuesChange, formItemLayout, removeUndefine } from '../../assets/js/global';
 const { Option } = Select;
 const { TabPane } = Tabs;
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 12 },
-  },
-};
-const onValuesChange = (props, changedValues, allValues) => {
-  props.onChange(removeUndefine(allValues));
-}
 
-const removeUndefine = (data) => {
-  for (let key in data) {
-    if (data[key] === undefined) {
-      data[key] = "";
-    }
-  }
-  return data;
-}
 const buildRes = (interfaceName, res) => {
   return moment().format('YYYY-MM-DD HH:mm:ss.SSS') + '    ' + interfaceName + ': ' + JSON.stringify(res, null, 4) + '\n'
 }
@@ -74,7 +53,7 @@ const eventpoll = (props) => {
           props.onSetStatusChange({ setStatusBtnText: '示闲', setStatusBtnClass: 'btn-green' });
         } else if (res.data.events[i].eventId === 351 && res.data.events[i].agentState === 1) {
           // $("#loginBtn").text('签出').attr('class', 'btn btn-danger');
-          props.onLoginChange({loginBtnText: '签出', loginBtnClass: 'btn-dust'})
+          props.onLoginChange({ loginBtnText: '签出', loginBtnClass: 'btn-dust' })
         } else if (res.data.events[i].eventId === 304) {
           // stateTimer();
           // $("#status").text('通话中').attr('class', 'btn dropdown-toggle btn-danger');
@@ -129,11 +108,11 @@ const eventpoll = (props) => {
           // $("#loginBtn").text('签入').attr('class', 'btn btn-success');
           // $("input[name='callId']").val('');
           if (AgentInfo.statusTimer) {
-          	clearInterval(AgentInfo.statusTimer);
+            clearInterval(AgentInfo.statusTimer);
           }
           props.onTimeChange('00:00:00');
           props.onStatusTextChange({ statusText: '未签入', statusBtnClass: '' });
-          props.onLoginChange({loginBtnText: '签入', loginBtnClass: 'btn-green'})
+          props.onLoginChange({ loginBtnText: '签入', loginBtnClass: 'btn-green' })
         } else {
           // if (res.data.events[i].eventId === '308') {
           //     queryCallres.Data(function (data) {
@@ -171,7 +150,7 @@ const queryWaitNum = (props) => {
 }
 class Login extends React.Component {
   onClick = () => {
-    this.props.onReKeyChange('2');
+    this.props.onReKeyChange('req');
     axios.post("http://192.168.88.8:8080/ccacs/ws/agent/login", JSON.stringify(removeUndefine(this.props.form.getFieldsValue())), {
       withCredentials: true,
     }).then((res) => {
@@ -183,8 +162,8 @@ class Login extends React.Component {
         AgentInfo.systemCode = this.props.form.getFieldsValue().systemCode;
       }
     }).catch(error => {
-      this.props.onResponse(buildRes('login', {"message": error.message}));
-    }) 
+      this.props.onResponse(buildRes('login', { "message": error.message }));
+    })
   }
   componentDidMount() {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
@@ -195,59 +174,73 @@ class Login extends React.Component {
       <Tabs defaultActiveKey="1">
         <TabPane tab="签入" key="1">
           <Form {...formItemLayout}>
-          <Form.Item label="平台工号">
-            {getFieldDecorator('agentId', {
-              rules: [{ required: true, message: 'Please input your agentId!' }], initialValue: '1006'
-            })(<Input name="agentId" />)}
-          </Form.Item>
-          <Form.Item label="坐席分机号">
-            {getFieldDecorator('phoneNum', {
-              rules: [{ required: true, message: 'Please input your phoneNum!' }], initialValue: '310000'
-            })(<Input name="phoneNum" />)}
-          </Form.Item>
-          <Form.Item label={
-            <span>
-              技能队列&nbsp;
+            <Form.Item label="平台工号">
+              {getFieldDecorator('agentId', {
+                rules: [{ required: true, message: 'Please input your agentId!' }], initialValue: '1006'
+              })(<Input name="agentId" />)}
+            </Form.Item>
+            <Form.Item label="坐席分机号">
+              {getFieldDecorator('phoneNum', {
+                rules: [{ required: true, message: 'Please input your phoneNum!' }], initialValue: '310000'
+              })(<Input name="phoneNum" />)}
+            </Form.Item>
+            <Form.Item label={
+              <span>
+                技能队列&nbsp;
                 <Tooltip title='格式为：["1111111","222222"]'>
-                <Icon type="question-circle" />
+                  <Icon type="question-circle" />
+                </Tooltip>
+              </span>
+            }>
+              <Tooltip
+                trigger={['focus']}
+                title={'格式为：["1111111","222222"]'}
+                placement="top"
+                overlayClassName="numeric-input"
+              >
+                {getFieldDecorator('skillIds', {})(
+                  <Input name="skillIds" placeholder='Please input your skillIds!' />
+                )}
               </Tooltip>
-            </span>
-          }>
-            <Tooltip
-              trigger={['focus']}
-              title={'格式为：["1111111","222222"]'}
-              placement="top"
-              overlayClassName="numeric-input"
-            >
-              {getFieldDecorator('skillIds', {})(
-                <Input name="skillIds" placeholder='Please input your skillIds!' />
-              )}
-            </Tooltip>
-          </Form.Item>
-          <Form.Item label="系统编码">
-            {getFieldDecorator('systemCode', {})(<Input name="systemCode" placeholder="Please input your systemCode!" />)}
-          </Form.Item>
-          <Form.Item label="省份id">
-            {getFieldDecorator('provId', {})(<Input name="provId" placeholder="Please input your provId!" />)}
-          </Form.Item>
-          <Form.Item label="强制签入">
-            {getFieldDecorator('isForceLogon', {
-              rules: [{ required: true }], initialValue: "true"
-            })(<Select name="isForceLogon">
-              <Option value="true">true</Option>
-              <Option value="false">false</Option>
-            </Select>)}
-          </Form.Item>
-          <Form.Item label="注册软电话">
-            <Select defaultValue="true">
-              <Option value="true">true</Option>
-              <Option value="false">false</Option>
-            </Select>
-          </Form.Item>
-          <Form.Item wrapperCol={{ span: 12, offset: 10 }}>
-            <Button type="primary" htmlType="submit" onClick={this.onClick}>Submit</Button>
-          </Form.Item>
-        </Form>
+            </Form.Item>
+            <Form.Item label="系统编码">
+              {getFieldDecorator('systemCode', {})(<Input name="systemCode" placeholder="Please input your systemCode!" />)}
+            </Form.Item>
+            <Form.Item label="省份id">
+              {getFieldDecorator('provId', {})(<Input name="provId" placeholder="Please input your provId!" />)}
+            </Form.Item>
+            <Form.Item label="签入后状态">
+              {getFieldDecorator('agentState', {
+                rules: [{ required: true }], initialValue: "4"
+              })(<Select name="agentState">
+                <Option value="4">空闲</Option>
+                <Option value="3">忙碌</Option>
+              </Select>)}
+            </Form.Item>
+            <Form.Item label="强制签入">
+              {getFieldDecorator('isForceLogon', {
+                rules: [{ required: true }], initialValue: "true"
+              })(<Select name="isForceLogon">
+                <Option value="true">true</Option>
+                <Option value="false">false</Option>
+              </Select>)}
+            </Form.Item>
+            <Form.Item label="注册软电话">
+              <Select defaultValue="true">
+                <Option value="true">true</Option>
+                <Option value="false">false</Option>
+              </Select>
+            </Form.Item>
+            <Form.Item label="是否登录WebRTC">
+              <Select defaultValue="false">
+                <Option value="true">true</Option>
+                <Option value="false">false</Option>
+              </Select>
+            </Form.Item>
+            <Form.Item wrapperCol={{ span: 12, offset: 10 }}>
+              <Button type="primary" htmlType="submit" onClick={this.onClick}>Submit</Button>
+            </Form.Item>
+          </Form>
         </TabPane>
       </Tabs>
     )

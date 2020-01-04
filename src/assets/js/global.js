@@ -1,15 +1,15 @@
 import moment from 'moment';
 export const ServerInfo = {
-    tyddUrl: "KEY_TYDD_URL",
+	tyddUrl: "KEY_TYDD_URL",
 	domin: "KEY_DOMIN",
 	password: "KEY_PASSWORD",
 	deviceNo: "KEY_DEVICENO",
-    eventpollTimer: "", //轮询定时器
+	eventpollTimer: "", //轮询定时器
 	queryWaitNumTimer: "", //查询AS01定时器
 }
 
 export const AgentInfo = {
-    callId: '',
+	callId: '',
 	statusTimer: '',
 	skillInfo: '',
 	agentId: '',
@@ -20,7 +20,7 @@ export const AgentInfo = {
 }
 
 export const CallInfo = {
-    callId: '',
+	callId: '',
 	callDirection: '',
 	callerDigits: '',
 	calledDigits: '',
@@ -33,7 +33,7 @@ export const statusTimer = (props) => {
 	if (AgentInfo.statusTimer) {
 		clearInterval(AgentInfo.statusTimer);
 	}
-	AgentInfo.statusTimer = setInterval(function () {
+	AgentInfo.statusTimer = setInterval(() => {
 		let duration = moment().diff(moment(startTime), 'seconds');
 		props.onTimeChange(formatDuration(duration));
 	}, 1000);
@@ -53,6 +53,30 @@ export const formatDuration = duration => {
 	} else {
 		return '00:00:00';
 	}
+}
+
+export const formItemLayout = {
+	labelCol: {
+		xs: { span: 24 },
+		sm: { span: 6 },
+	},
+	wrapperCol: {
+		xs: { span: 24 },
+		sm: { span: 12 },
+	},
+};
+
+export const onValuesChange = (props, changedValues, allValues) => {
+	props.onChange(removeUndefine(allValues));
+}
+
+export const removeUndefine = data => {
+	for (let key in data) {
+		if (data[key] === undefined) {
+			data[key] = "";
+		}
+	}
+	return data;
 }
 
 export const isObjectLike = value => !!value && typeof value == 'object';

@@ -14,7 +14,6 @@ const formItemLayout = {
 const onValuesChange = (props, changedValues, allValues) => {
   props.onChange(removeUndefine(allValues));
 }
-
 const removeUndefine = (data) => {
   for (let key in data) {
     if (data[key] === undefined) {
@@ -27,7 +26,6 @@ class SetEnvirment extends React.Component {
   componentDidMount() {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
   }
-  
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
@@ -71,7 +69,6 @@ class SetEnvirment extends React.Component {
                 // rules: [{ required: true, message: 'Please input your systemCode!' }],
               })(<Input placeholder="Please input your systemCode!" />)}
             </Form.Item>
-
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
               <Button type="primary" htmlType="submit">Save</Button>
             </Form.Item>

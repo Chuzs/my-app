@@ -10,7 +10,7 @@ const initState = {
     loginBtnText: '签入',
     loginBtnClass: 'btn-green',
     restVisible: false,
-    reKey: '1',
+    reKey: 'req',
 
 }
 const updateText = (state = initState, action) => {

@@ -6,19 +6,19 @@ const { TabPane } = Tabs;
 const { TextArea } = Input;
 class Content extends React.Component {
   state = {
-    operactions: ''
+    operation: ''
   }
   clear = () => {
     this.props.onResponse('');
   }
   UNSAFE_componentWillReceiveProps(props){
-    if (props.reKey === '2') {
+    if (props.reKey === 'res') {
       this.setState({
-        operactions: <Button onClick={this.clear}>清除</Button>
+        operation: <Button onClick={this.clear}>清除</Button>
       })
-    } else if(props.reKey === '1') {
+    } else if(props.reKey === 'req') {
       this.setState({
-        operactions: ""
+        operation: ""
       })
     }
   }
@@ -46,12 +46,12 @@ class Content extends React.Component {
               </Route>
             </Switch>
           </Col>
-          <Col xs={0} sm={0} md={0} lg={9} xl={11} xxl={11} offset={1}>
-            <Tabs activeKey={this.props.reKey} tabBarExtraContent={this.state.operactions} onTabClick={this.onClick}>
-              <TabPane tab="请求报文" key="1">
+          <Col xs={0} sm={0} md={0} lg={9} xl={10} xxl={10} offset={2} >
+            <Tabs activeKey={this.props.reKey} tabBarExtraContent={this.state.operation} onTabClick={this.onClick}>
+              <TabPane tab="请求报文" key="req">
                 <TextArea style={{ "resize": "none", "maxHeight": "calc(100vh - 300px)", "border": "none" }} autoSize={{ minRows: 1 }} value={reqText}></TextArea>
               </TabPane>
-              <TabPane tab="响应报文" key="2">
+              <TabPane tab="响应报文" key="res">
                 <TextArea style={{ "resize": "none", "maxHeight": "calc(100vh - 300px)", "border": "none" }} autoSize="true" value={resText}></TextArea>
               </TabPane>
             </Tabs>

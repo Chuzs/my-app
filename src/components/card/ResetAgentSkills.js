@@ -1,28 +1,7 @@
 import React from 'react';
 import { Button, Form, Input, Tabs } from 'antd';
+import { onValuesChange, formItemLayout } from '../../assets/js/global'
 const { TabPane } = Tabs;
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 6 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 12 },
-  },
-};
-const onValuesChange = (props, changedValues, allValues) => {
-  props.onChange(removeUndefine(allValues));
-}
-
-const removeUndefine = (data) => {
-  for (let key in data) {
-    if (data[key] === undefined) {
-      data[key] = "";
-    }
-  }
-  return data;
-}
 class ResetAgentSkills extends React.Component {
   componentDidMount() {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
