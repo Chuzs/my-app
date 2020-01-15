@@ -10,43 +10,65 @@ let id = 1;
 class Login extends React.Component {
   state = {
     keys: [],
-    userCenter: "false"
+    userCenter: "false",
+    register: "true"
   }
   login = () => {
     this.props.onReKeyChange('res');
-    axios.post("http://192.168.88.8:8080/ccacs/ws/agent/login",
-      JSON.stringify(removeUndefine(this.props.form.getFieldsValue())), {
-      withCredentials: true,
-    }).then((res) => {
-      this.props.onResponse(buildRes('login', res.data));
-      if (res.data.result === '0') {
-        ServerInfo.eventpollTimer = setInterval(eventpoll(this.props), 1000);
-        ServerInfo.queryWaitNumTimer = setInterval(queryWaitNum(this.props), 2000);
-        AgentInfo.agentId = this.props.form.getFieldsValue().agentId;
-        AgentInfo.systemCode = this.props.form.getFieldsValue().systemCode;
-      }
-    }).catch(error => {
-      this.props.onResponse(buildRes('login', { "message": error.message }));
-    })
+    let registerData = {
+      "userName": localStorage.getItem('userName'),
+      "userPasswd": localStorage.getItem('userPasswd'),
+      "domin": localStorage.getItem('domin')
+    }
+    let registerSuccess = false;
+    if (this.state.register === "true") {
+      axios.post('http://localhost:23412/sipphone/register', JSON.stringify(registerData)).then(res => {
+        if (res.data.rtnCode === '0') {
+          registerSuccess = true;
+        }
+        this.props.onResponse(buildRes('register', res.data));
+      }).catch(error => {
+        this.props.onResponse(buildRes('register', { "message": error.message }));
+      })
+    }
+    if (this.state.register === "false" || registerSuccess) {
+      axios.post("http://" + localStorage.getItem("tyddURL") + "/ccacs/ws/agent/login",
+        JSON.stringify(removeUndefine(this.props.form.getFieldsValue())), {
+        withCredentials: true,
+      }).then(res => {
+        this.props.onResponse(buildRes('login', res.data));
+        if (res.data.result === '0') {
+          ServerInfo.eventpollTimer = setInterval(eventpoll(this.props), 1000);
+          ServerInfo.queryWaitNumTimer = setInterval(queryWaitNum(this.props), 2000);
+          AgentInfo.agentId = this.props.form.getFieldsValue().agentId;
+          AgentInfo.systemCode = this.props.form.getFieldsValue().systemCode;
+        }
+      }).catch(error => {
+        this.props.onResponse(buildRes('login', { "message": error.message }));
+      })
+    }
   }
   toggleUserCenter = (value) => {
     this.setState({
       userCenter: value
     })
   }
+  toggleRegister = (value) => {
+    this.setState({
+      register: value
+    })
+  }
   remove = k => {
     if (this.state.keys.length === 0) {
       return;
     }
-    this.state.keys.pop()
+    this.state.keys.pop();
     this.setState({
-      // keys: this.state.keys.filter(key => key !== k),
       keys: this.state.keys,
     });
     id--
     setTimeout(() => { onValuesChange(this.props, "", this.props.form.getFieldsValue()) }, 10);
   };
-
   add = () => {
     this.setState({
       keys: this.state.keys.concat(id++),
@@ -123,7 +145,6 @@ class Login extends React.Component {
         </Tooltip>
       </Form.Item>
     }
-
     return (
       <Tabs defaultActiveKey="1">
         <TabPane tab="签入" key="1">
@@ -135,10 +156,11 @@ class Login extends React.Component {
             </Form.Item>
             <Form.Item label="坐席分机号">
               {getFieldDecorator('phoneNum', {
-                rules: [{ required: true, message: 'Please input your phoneNum!' }], initialValue: '310000'
+                rules: [{ required: true, message: 'Please input your phoneNum!' }],
+                initialValue: localStorage.getItem('userName') === 'undefined' ? '' : localStorage.getItem('userName')
               })(<Input name="phoneNum" />)}
             </Form.Item>
-            { SkillId }
+            {SkillId}
             <Form.Item label="系统编码">
               {getFieldDecorator('systemCode', {})(
                 <Input name="systemCode" placeholder="Please input your systemCode!" />
@@ -166,7 +188,7 @@ class Login extends React.Component {
               </Select>)}
             </Form.Item>
             <Form.Item label="注册软电话">
-              <Select defaultValue="true">
+              <Select defaultValue="true" onChange={this.toggleRegister}>
                 <Option value="true">true</Option>
                 <Option value="false">false</Option>
               </Select>

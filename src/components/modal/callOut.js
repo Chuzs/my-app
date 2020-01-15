@@ -27,7 +27,7 @@ class callOutModal extends React.Component {
             display: 'block',
             height: '30px',
             lineHeight: '30px',
-          };
+        };
         return (
             <Modal
                 title="Basic Modal"
