@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Input, Tabs, Select, Row, Col, Icon } from 'antd';
+import { Button, Form, Input, Tabs, Select, Row, Col } from 'antd';
 import { onValuesChange } from '../../assets/js/global'
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -28,20 +28,20 @@ class ResetAgentSkills extends React.Component {
     if (this.state.keys.length === 0) {
       return;
     }
-    console.log(this.state.keys)
+    this.state.keys.pop();
     this.setState({
-      keys: this.state.keys.filter(key => key !== k),
-      // keys: this.state.keys.pop(),
+      // keys: this.state.keys.filter(key => key !== k),
+      keys: this.state.keys,
     });
     id--
-    onValuesChange(this.props, "", this.props.form.getFieldsValue());
+    setTimeout(() => {onValuesChange(this.props, "", this.props.form.getFieldsValue())}, 10);
   };
   
   add = () => {
     this.setState({
       keys: this.state.keys.concat(id++),
     });
-    onValuesChange(this.props, "", this.props.form.getFieldsValue());
+    setTimeout(() => {onValuesChange(this.props, "", this.props.form.getFieldsValue())}, 10);
   };
   render() {
     const { getFieldDecorator } = this.props.form;
