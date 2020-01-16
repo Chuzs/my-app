@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form, Input, Tabs, Tooltip, Icon, message } from 'antd';
+import { onValuesChange } from '../../assets/js/global';
 const { TabPane } = Tabs;
 const formItemLayout = {
   labelCol: {
@@ -11,17 +12,6 @@ const formItemLayout = {
     sm: { span: 12 },
   },
 };
-const onValuesChange = (props, changedValues, allValues) => {
-  props.onChange(removeUndefine(allValues));
-}
-const removeUndefine = (data) => {
-  for (let key in data) {
-    if (data[key] === undefined) {
-      data[key] = "";
-    }
-  }
-  return data;
-}
 class SetEnvirment extends React.Component {
   componentDidMount() {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
@@ -59,32 +49,32 @@ class SetEnvirment extends React.Component {
               >
                 {getFieldDecorator('tyddURL', {
                   rules: [{ required: true, message: 'Please input your tyddURL!' }],
-                  initialValue: localStorage.getItem("tyddURL") === "undefined" ? '' : localStorage.getItem("tyddURL")
+                  initialValue: localStorage.getItem("tyddURL") === "undefined" || localStorage.getItem("tyddURL") === "null" ? '' : localStorage.getItem("tyddURL")
                 })(<Input placeholder="Please input your tyddURL!" />)}
               </Tooltip>
             </Form.Item>
             <Form.Item label="坐席分机号">
               {getFieldDecorator('userName', {
                 rules: [{ required: true, message: 'Please input your deviceNum!' }],
-                initialValue: localStorage.getItem("userName") === "undefined" ? '' : localStorage.getItem("userName")
+                initialValue: localStorage.getItem("userName") === "undefined" || localStorage.getItem("userName") === "null" ? '' : localStorage.getItem("userName")
               })(<Input placeholder="Please input your deviceNum!" />)}
             </Form.Item>
             <Form.Item label="分机密码">
               {getFieldDecorator('userPasswd', {
                 rules: [{ required: true, message: 'Please input your password!' }],
-                initialValue: localStorage.getItem("userPasswd") === "undefined" ? '' : localStorage.getItem("userPasswd")
+                initialValue: localStorage.getItem("userPasswd") === "undefined" || localStorage.getItem("userPasswd") === "null" ? '' : localStorage.getItem("userPasswd")
               })(<Input placeholder="Please input your password!" />)}
             </Form.Item>
             <Form.Item label="软电话注册地址">
               {getFieldDecorator('domain', {
                 rules: [{ required: true, message: 'Please input your address!' }],
-                initialValue: localStorage.getItem("domain") === "undefined" ? '' : localStorage.getItem("domain")
+                initialValue: localStorage.getItem("domain") === "undefined" || localStorage.getItem("domain") === "null" ? '' : localStorage.getItem("domain")
               })(<Input placeholder="Please input your address!" />)}
             </Form.Item>
             <Form.Item label="系统编码">
               {getFieldDecorator('systemCode', {
                 // rules: [{ required: true, message: 'Please input your systemCode!' }],
-                initialValue: localStorage.getItem("systemCode") === "undefined" ? '' : localStorage.getItem("systemCode")
+                initialValue: localStorage.getItem("systemCode") === "undefined" || localStorage.getItem("systemCode") === "null" ? '' : localStorage.getItem("systemCode")
               })(<Input placeholder="Please input your systemCode!" />)}
             </Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
@@ -96,14 +86,12 @@ class SetEnvirment extends React.Component {
           <Form {...formItemLayout}>
             <Form.Item label="websocket URL">
               {getFieldDecorator('websocketUrl', {
-                // rules: [{ required: true, message: 'Please input your systemCode!' }],
-                initialValue: localStorage.getItem("websocketUrl") === "undefined" ? '' : localStorage.getItem("websocketUrl")
+                initialValue: localStorage.getItem("websocketUrl") === "undefined" || localStorage.getItem("websocketUrl") === "null" ? '' : localStorage.getItem("websocketUrl")
               })(<Input placeholder="Please input your websocketUrl!" />)}
             </Form.Item>
             <Form.Item label="webRTC 密码">
               {getFieldDecorator('RTCpwd', {
-                // rules: [{ required: true, message: 'Please input your systemCode!' }],
-                initialValue: localStorage.getItem("RTCpwd") === "undefined" ? '' : localStorage.getItem("RTCpwd")
+                initialValue: localStorage.getItem("RTCpwd") === "undefined" || localStorage.getItem("RTCpwd") === "null" ? '' : localStorage.getItem("RTCpwd")
               })(<Input placeholder="Please input your webRTC password!" />)}
             </Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
@@ -115,8 +103,7 @@ class SetEnvirment extends React.Component {
           <Form {...formItemLayout}>
             <Form.Item label="ZUC URL">
               {getFieldDecorator('zucUrl', {
-                // rules: [{ required: true, message: 'Please input your systemCode!' }],
-                initialValue: localStorage.getItem("zucUrl") === "undefined" ? '' : localStorage.getItem("zucUrl")
+                initialValue: localStorage.getItem("zucUrl") === "undefined" || localStorage.getItem("zucUrl") === "null" ? '' : localStorage.getItem("zucUrl")
               })(<Input placeholder="Please input your zucUrl!" />)}
             </Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>

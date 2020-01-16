@@ -157,7 +157,7 @@ class Login extends React.Component {
             <Form.Item label="坐席分机号">
               {getFieldDecorator('phoneNum', {
                 rules: [{ required: true, message: 'Please input your phoneNum!' }],
-                initialValue: localStorage.getItem('userName') === 'undefined' ? '' : localStorage.getItem('userName')
+                initialValue: localStorage.getItem('userName') === 'undefined' || localStorage.getItem('userName') === 'null' ? '' : localStorage.getItem('userName')
               })(<Input name="phoneNum" />)}
             </Form.Item>
             {SkillId}

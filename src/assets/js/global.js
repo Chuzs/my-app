@@ -12,7 +12,7 @@ export const ServerInfo = {
 export const formItemLayout = {
 	labelCol: {
 		xs: { span: 24 },
-		sm: { span: 6, offset: 2 },
+		sm: { span: 6, offset: 1 },
 	},
 	wrapperCol: {
 		xs: { span: 24 },
@@ -68,12 +68,13 @@ export const formatDuration = duration => {
 }
 
 export const onValuesChange = (props, changedValues, allValues) => {
+	console.log(removeUndefine(allValues))
 	props.onChange(removeUndefine(allValues));
 }
 
 export const removeUndefine = data => {
 	for (let key in data) {
-		if (data[key] === undefined) {
+		if (data[key] === undefined || data[key] === "null") {
 			data[key] = "";
 		} else if (isObjectLike(data[key])) {
 			removeUndefine(data[key]);
@@ -91,7 +92,7 @@ export const buildRes = (interfaceName, res) => {
 }
 
 export const eventpoll = props => {
-	axios.post("http://192.168.88.8:8080/ccacs/ws/event/poll", '{}', {
+	axios.post("http://"+ localStorage.getItem("tyddURL") +"/ccacs/ws/event/poll", '{}', {
 		withCredentials: true,
 		timeout: 11000,
 	}).then((res) => {
@@ -214,7 +215,7 @@ export const queryWaitNum = props => {
 		agentId: AgentInfo.agentId,
 		systemCode: AgentInfo.systemCode
 	}
-	axios.post("http://192.168.88.8:8080/ccacs/ws/query/queryacdstatus", JSON.stringify(params), {
+	axios.post("http://"+ localStorage.getItem("tyddURL") +"/ccacs/ws/query/queryacdstatus", JSON.stringify(params), {
 		withCredentials: true,
 	}).then((res) => {
 		let queueSize = 0;
