@@ -107,7 +107,7 @@ export const eventpoll = props => {
 					if (props.statusText !== '通话中') {
 						statusTimer(props);
 					}
-					props.onStatusTextChange({ statusText: '整理态', statusBtnClass: 'btn-sunset' });
+					props.onStatusTextChange({ text: '整理态', className: 'btn-sunset' });
 					props.onOtherworkChange({ otherworkBtnText: '取消整理' });
 				} else if (res.data.events[i].eventId === 351 && res.data.events[i].agentState === 4) {
 					// if ($("#status").text() !== '待接听') {
@@ -120,7 +120,7 @@ export const eventpoll = props => {
 					statusTimer(props);
 					if (props.statusText !== '待接听') {
 						console.log("示忙")
-						props.onStatusTextChange({ statusText: '空闲', statusBtnClass: 'btn-green' });
+						props.onStatusTextChange({ text: '空闲', className: 'btn-green' });
 						props.onSetStatusChange({ text: '示忙', className: 'btn-volcano' });
 						props.onOtherworkChange({ otherworkBtnText: '整理' });
 					}
@@ -129,11 +129,11 @@ export const eventpoll = props => {
 					// $("#status").text('忙碌').attr('class', 'btn dropdown-toggle btn-danger');
 					// $("#setStateBtn").text('示闲').attr('class', 'btn btn-success');
 					statusTimer(props);
-					props.onStatusTextChange({ statusText: '忙碌', statusBtnClass: 'btn-volcano' });
-					props.onSetStatusChange({ setStatusBtnText: '示闲', setStatusBtnClass: 'btn-green' });
+					props.onStatusTextChange({ text: '忙碌', className: 'btn-volcano' });
+					props.onSetStatusChange({ text: '示闲', className: 'btn-green' });
 				} else if (res.data.events[i].eventId === 351 && res.data.events[i].agentState === 1) {
 					// $("#loginBtn").text('签出').attr('class', 'btn btn-danger');
-					props.onLoginChange({ loginBtnText: '签出', loginBtnClass: 'btn-dust' })
+					props.onLoginChange({ text: '签出', className: 'btn-dust' })
 				} else if (res.data.events[i].eventId === 304) {
 					// stateTimer();
 					// $("#status").text('通话中').attr('class', 'btn dropdown-toggle btn-danger');
@@ -152,7 +152,7 @@ export const eventpoll = props => {
 					// }
 					// alert(res.data.events[i].callId);
 					statusTimer(props);
-					props.onStatusTextChange({ statusText: '通话中', statusBtnClass: 'btn-volcano' });
+					props.onStatusTextChange({ text: '通话中', className: 'btn-volcano' });
 					CallInfo.callId = res.data.events[i].callId;
 					CallInfo.callDirection = res.data.events[i].callDirection;
 					CallInfo.callerDigits = res.data.events[i].callerAddress;
@@ -163,7 +163,7 @@ export const eventpoll = props => {
 					// $('#btnGroup button').attr('disabled', true);
 					// $("#transferBtn, #releaseCallBtn, #setStateBtn, #restBtn,#anwser_btn,#hangup_btn, #status_btn").attr('disabled', false);
 					statusTimer(props);
-					props.onStatusTextChange({ statusText: '待接听', statusBtnClass: 'btn-sunset' });
+					props.onStatusTextChange({ text: '待接听', className: 'btn-sunset' });
 				} else if (res.data.events[i].eventId === 351 && res.data.events[i].agentState === 8) {
 					// if (AgentInfo.restTime) {
 					//     countdownTimer(AgentInfo.restTime, function () {
@@ -191,8 +191,8 @@ export const eventpoll = props => {
 						clearInterval(AgentInfo.statusTimer);
 					}
 					props.onTimeChange('00:00:00');
-					props.onStatusTextChange({ statusText: '未签入', statusBtnClass: '' });
-					props.onLoginChange({ loginBtnText: '签入', loginBtnClass: 'btn-green' })
+					props.onStatusTextChange({ text: '未签入', className: '' });
+					props.onLoginChange({ text: '签入', className: 'btn-green' })
 				} else {
 					// if (res.data.events[i].eventId === '308') {
 					//     queryCallres.Data(function (data) {

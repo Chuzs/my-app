@@ -25,7 +25,7 @@ class Header extends React.Component {
           </Col>
           <Col xs={0} sm={0} md={0} lg={18} xl={20} xxl={21} className="lh64">
             <Button.Group className="lh64 mr10">
-              <Button className={this.props.statusBtnClass}>{this.props.statusText}</Button>
+              <Button className={this.props.statusBtn.className}>{this.props.statusBtn.text}</Button>
               <Button>{this.props.time}</Button>
             </Button.Group>
             <Button.Group className="lh64">
@@ -36,11 +36,11 @@ class Header extends React.Component {
               <Button className="btn-sunset">{this.props.otherworkBtnText}</Button>
             </Button.Group>
             <Button.Group className="lh64 fr mr10">
-              <Button className={this.props.loginBtnClass}>{this.props.loginBtnText}</Button>
+              <Button className={this.props.loginBtn.className}>{this.props.loginBtn.text}</Button>
             </Button.Group>
-            <Button.Group className="lh64 fr mr10">
+            {/* <Button.Group className="lh64 fr mr10">
               <Button>整理态</Button>
-            </Button.Group>
+            </Button.Group> */}
             <Button.Group className="lh64 fr mr10">
               <Button className={this.props.setStatusBtn.className}>{this.props.setStatusBtn.text}</Button>
               <Button className="btn-geekblue">综合接续</Button>

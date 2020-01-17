@@ -42,32 +42,32 @@ class SetEnvirment extends React.Component {
               >
                 {getFieldDecorator('tyddURL', {
                   rules: [{ required: true, message: 'Please input your tyddURL!' }],
-                  initialValue: config.tyddURL
+                  initialValue: config ? config.tyddURL : ''
                 })(<Input placeholder="Please input your tyddURL!" />)}
               </Tooltip>
             </Form.Item>
             <Form.Item label="坐席分机号">
               {getFieldDecorator('userName', {
                 rules: [{ required: true, message: 'Please input your deviceNum!' }],
-                initialValue: config.userName
+                initialValue: config ? config.userName : ''
               })(<Input placeholder="Please input your deviceNum!" />)}
             </Form.Item>
             <Form.Item label="分机密码">
               {getFieldDecorator('userPasswd', {
                 rules: [{ required: true, message: 'Please input your password!' }],
-                initialValue: config.userPasswd
+                initialValue: config ? config.userPasswd : ''
               })(<Input placeholder="Please input your password!" />)}
             </Form.Item>
             <Form.Item label="软电话注册地址">
               {getFieldDecorator('domain', {
                 rules: [{ required: true, message: 'Please input your address!' }],
-                initialValue: config.domain
+                initialValue: config ? config.domain : ''
               })(<Input placeholder="Please input your address!" />)}
             </Form.Item>
             <Form.Item label="系统编码">
               {getFieldDecorator('systemCode', {
                 // rules: [{ required: true, message: 'Please input your systemCode!' }],
-                initialValue: config.systemCode
+                initialValue: config ? config.systemCode : ''
               })(<Input placeholder="Please input your systemCode!" />)}
             </Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
@@ -79,12 +79,12 @@ class SetEnvirment extends React.Component {
           <Form {...formItemLayout}>
             <Form.Item label="websocket URL">
               {getFieldDecorator('websocketUrl', {
-                initialValue: config.websocketUrl
+                initialValue: config ? config.websocketUrl : ''
               })(<Input placeholder="Please input your websocketUrl!" />)}
             </Form.Item>
             <Form.Item label="webRTC 密码">
               {getFieldDecorator('RTCpwd', {
-                initialValue: config.RTCpwd
+                initialValue: config ? config.RTCpwd : ''
               })(<Input placeholder="Please input your webRTC password!" />)}
             </Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
@@ -96,7 +96,7 @@ class SetEnvirment extends React.Component {
           <Form {...formItemLayout}>
             <Form.Item label="ZUC URL">
               {getFieldDecorator('zucUrl', {
-                initialValue: config.zucUrl
+                initialValue: config ? config.zucUrl : ''
               })(<Input placeholder="Please input your zucUrl!" />)}
             </Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>

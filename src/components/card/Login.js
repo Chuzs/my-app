@@ -97,7 +97,6 @@ class Login extends React.Component {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
   }
   render() {
-    // console.log(this.state.userCenter)
     const { getFieldDecorator } = this.props.form;
     const rows = this.state.keys.map((k, index) => (
       <Row gutter={5} key={k}>
@@ -175,7 +174,7 @@ class Login extends React.Component {
             <Form.Item label="坐席分机号">
               {getFieldDecorator('phoneNum', {
                 rules: [{ required: true, message: 'Please input your phoneNum!' }],
-                initialValue: JSON.parse(localStorage.getItem('config')).userName
+                initialValue: JSON.parse(localStorage.getItem('config')) ? JSON.parse(localStorage.getItem('config')) : ''
               })(<Input name="phoneNum" placeholder="Please input your phoneNum!" />)}
             </Form.Item>
             {SkillId}

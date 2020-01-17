@@ -1,15 +1,12 @@
 let resText = ''
 const initState = {
     waitNum: 0,
-    statusText: '未签人',
+    statusBtn: { text: '未签人', className: ''},
     time: '00:00:00',
-    setStatusBtnClass: 'btn-volcano',
-    setStatusBtnText: '示忙',
-    setStatusBtn: {text: '示忙', className: 'btn-volcano'},
+    setStatusBtn: { text: '示忙', className: 'btn-volcano' },
     restBtnText: '休息',
     otherworkBtnText: '整理',
-    loginBtnText: '签入',
-    loginBtnClass: 'btn-green',
+    loginBtn: { text: '签入', className: 'btn-green' },
     restVisible: false,
     reKey: 'req',
     skillNameList: [],
@@ -31,13 +28,11 @@ const updateText = (state = initState, action) => {
             })
         case 'SET':
             return Object.assign({}, state, {
-                setStatusBtnText: action.setStatusBtn.setStatusText,
-                setStatusBtnClass: action.setStatusBtn.setStatusBtnClass
+                setStatusBtn: action.setStatusBtn
             })
         case 'LOGIN':
             return Object.assign({}, state, {
-                loginBtnText: action.loginBtn.loginBtnText,
-                loginBtnClass: action.loginBtn.loginBtnClass
+                loginBtn: action.loginBtn
             })
         case 'REST':
             return Object.assign({}, state, {
