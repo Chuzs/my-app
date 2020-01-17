@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Form, Input, Select, Tooltip, Icon, Tabs, Row, Col } from 'antd';
 import axios from 'axios';
 import { AgentInfo, ServerInfo, onValuesChange, formItemLayout, removeUndefine, buildRes, eventpoll, queryWaitNum } from '../../assets/js/global';
+// import * as global from '../../assets/js/global';
 const { Option } = Select;
 const { TabPane } = Tabs;
 const InputGroup = Input.Group;
@@ -11,7 +12,7 @@ class Login extends React.Component {
   state = {
     keys: [],
     userCenter: "false",
-    register: "true"
+    register: "false"
   }
   login = () => {
     this.props.onReKeyChange('res');
@@ -32,7 +33,7 @@ class Login extends React.Component {
       })
     }
     if (this.state.register === "false" || registerSuccess) {
-      axios.post("http://" + localStorage.getItem("tyddURL") + "/ccacs/ws/agent/login",
+      axios.post("http://" + JSON.parse(localStorage.getItem("config")).tyddURL + "/ccacs/ws/agent/login",
         JSON.stringify(removeUndefine(this.props.form.getFieldsValue())), {
         withCredentials: true,
       }).then(res => {
@@ -42,6 +43,23 @@ class Login extends React.Component {
           ServerInfo.queryWaitNumTimer = setInterval(queryWaitNum(this.props), 2000);
           AgentInfo.agentId = this.props.form.getFieldsValue().agentId;
           AgentInfo.systemCode = this.props.form.getFieldsValue().systemCode;
+          axios.post("http://" + JSON.parse(localStorage.getItem("config")).tyddURL + "/ccacs/ws/query/skillsinfo", '{}', {
+            withCredentials: true,
+          }).then(res => {
+            this.props.onResponse(buildRes('skillsinfo', res.data));
+            if (res.data.result === '0') {
+              AgentInfo.skillInfo = res.data.skillsInfo;
+              let skillNameList = [];
+              for (let i in AgentInfo.skillInfo) {
+                skillNameList.push(AgentInfo.skillInfo[i].skillName)
+              }
+              // console.log(skillNameList)
+              this.props.onSkillNameListChange(skillNameList)
+              this.props.onSkillListVisibleChange(true);
+            }
+          }).catch(error => {
+            this.props.onResponse(buildRes('skillsinfo', { "message": error.message }));
+          })
         }
       }).catch(error => {
         this.props.onResponse(buildRes('login', { "message": error.message }));
@@ -79,7 +97,7 @@ class Login extends React.Component {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
   }
   render() {
-    console.log(this.state.userCenter)
+    // console.log(this.state.userCenter)
     const { getFieldDecorator } = this.props.form;
     const rows = this.state.keys.map((k, index) => (
       <Row gutter={5} key={k}>
@@ -157,8 +175,8 @@ class Login extends React.Component {
             <Form.Item label="坐席分机号">
               {getFieldDecorator('phoneNum', {
                 rules: [{ required: true, message: 'Please input your phoneNum!' }],
-                initialValue: localStorage.getItem('config').userName
-              })(<Input name="phoneNum" placeholder="Please input your phoneNum!"/>)}
+                initialValue: JSON.parse(localStorage.getItem('config')).userName
+              })(<Input name="phoneNum" placeholder="Please input your phoneNum!" />)}
             </Form.Item>
             {SkillId}
             <Form.Item label="系统编码">
@@ -188,7 +206,7 @@ class Login extends React.Component {
               </Select>)}
             </Form.Item>
             <Form.Item label="注册软电话">
-              <Select defaultValue="true" onChange={this.toggleRegister}>
+              <Select defaultValue="false" onChange={this.toggleRegister}>
                 <Option value="true">true</Option>
                 <Option value="false">false</Option>
               </Select>

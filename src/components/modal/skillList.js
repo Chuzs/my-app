@@ -1,53 +1,70 @@
 import React from 'react';
 import { Modal, Checkbox } from 'antd'
+import axios from 'axios';
+import { buildRes, AgentInfo } from '../../assets/js/global';
 const CheckboxGroup = Checkbox.Group;
 
-const plainOptions = ['Apple', 'Pear', 'Orange','Apple', 'Pear', 'Orange','Apple', 'Pear', 'Orange','Apple', 'Pear', 'Orange'];
-const defaultCheckedList = ['Apple', 'Orange'];
+// const plainOptions = ['Apple', 'Pear', 'Orange','Apple', 'Pear', 'Orange','Apple', 'Pear', 'Orange','Apple', 'Pear', 'Orange'];
+// const defaultCheckedList = ["测试技能3", "测试技能4", "测试技能5"];
 
 class skillListModal extends React.Component {
-
   state = {
-    checkedList: defaultCheckedList,
-    indeterminate: true,
-    checkAll: false,
+    indeterminate: false,
+    checkAll: true,
   };
-
   handleOk = e => {
-    console.log(e);
+    this.props.onSkillListVisibleChange(false);
+    axios.post("http://" + localStorage.getItem("tyddURL") + "/ccacs/ws/agent/resetskill", "{}", {
+      withCredentials: true,
+    }).then((res) => {
+      this.props.onResponse(buildRes('resetskill', res.data));
+    }).catch(error => {
+      this.props.onResponse(buildRes('resetskill', { "message": error.message }));
+    })
+    AgentInfo.skillNameList = [];
     this.setState({
-      visible: false,
-    });
+      indeterminate: false,
+      checkAll: true
+    })
   };
 
-  handleCancel = e => {
-    console.log(e);
+  handleCancel = () => {
+    this.props.onSkillListVisibleChange(false);
+    AgentInfo.skillNameList = [];
     this.setState({
-      visible: false,
-    });
+      indeterminate: false,
+      checkAll: true
+    })
   };
 
   onChange = checkedList => {
+    this.props.onSkillNameListChange(checkedList);
     this.setState({
-      checkedList,
-      indeterminate: !!checkedList.length && checkedList.length < plainOptions.length,
-      checkAll: checkedList.length === plainOptions.length,
+      indeterminate: !!checkedList.length && checkedList.length < AgentInfo.skillNameList.length,
+      checkAll: checkedList.length === AgentInfo.skillNameList.length,
     });
   };
 
-  onCheckAllChange = e => {
+  onCheckAllChange = (e) => {
+    this.props.onSkillNameListChange(e.target.checked ? AgentInfo.skillNameList : []);
     this.setState({
-      checkedList: e.target.checked ? plainOptions : [],
       indeterminate: false,
       checkAll: e.target.checked,
     });
   };
 
   render() {
+    // let skillNameList = this.props.skillNameList;
+    // skillList =[{"skillName":"测试技能3", "skillId":"210316669", "channelId":5}, {"skillName":"测试技能4", "skillId":"210316910", "channelId":5}]
+    // skillNameList = this.props.skillNameList ? this.props.skillNameList : defaultCheckedList;
+    // console.log(skillNameList)
+    if (AgentInfo.skillNameList.length === 0) {
+      AgentInfo.skillNameList = this.props.skillNameList;
+    }
     return (
       <Modal
         title="技能队列（多选）"
-        visible={false}
+        visible={this.props.skillListVisible}
         onOk={this.handleOk}
         onCancel={this.handleCancel}
       >
@@ -55,17 +72,17 @@ class skillListModal extends React.Component {
           <div style={{ borderBottom: '1px solid #E9E9E9' }}>
             <Checkbox
               indeterminate={this.state.indeterminate}
-              onChange={this.onCheckAllChange}
+              onChange={event => { this.onCheckAllChange(event) }}
               checked={this.state.checkAll}
             >
-              Check all
+              全选
           </Checkbox>
           </div>
           <br />
           <CheckboxGroup
-            options={plainOptions}
-            value={this.state.checkedList}
-            onChange={this.onChange}
+            options={AgentInfo.skillNameList}
+            value={this.props.skillNameList}
+            onChange={(checkedList) => { this.onChange(checkedList) }}
           />
         </div>
       </Modal>

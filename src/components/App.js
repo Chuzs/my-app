@@ -4,7 +4,7 @@ import Sider from './Sider';
 import Content from './Content';
 import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from 'react-redux';
-import { updateReqText, updateResText, updateStatusBtn, updateWaitNum, updateTime, updateLoginBtn, updateRestBtn, updateOtherworkBtn, updateSetStatusBtn, updateRestVisible, updateReKey } from '../redux/actions';
+import { updateReqText, updateResText, updateStatusBtn, updateWaitNum, updateTime, updateLoginBtn, updateRestBtn, updateOtherworkBtn, updateSetStatusBtn, updateRestVisible, updateReKey, updateSkillNameList, updateSkillListVisible } from '../redux/actions';
 
 
 
@@ -56,6 +56,12 @@ const mapDispatchToProps = dispatch => {
     },
     onReKeyChange: value => {
       dispatch(updateReKey(value));
+    },
+    onSkillNameListChange: value => {
+      dispatch(updateSkillNameList(value))
+    },
+    onSkillListVisibleChange: value => {
+      dispatch(updateSkillListVisible(value))
     }
   }
 }
@@ -69,12 +75,15 @@ const mapStateToProps = state => ({
   time: state.time,
   setStatusBtnClass: state.setStatusBtnClass,
   setStatusBtnText: state.setStatusBtnText,
+  setStatusBtn: state.setStatusBtn,
   restBtnText: state.restBtnText,
   otherworkBtnText: state.otherworkBtnText,
   loginBtnText: state.loginBtnText,
   loginBtnClass: state.loginBtnClass,
   restVisible: state.restVisible,
   reKey: state.reKey,
+  skillNameList: state.skillNameList,
+  skillListVisible: state.skillListVisible,
 })
 
 App = connect(

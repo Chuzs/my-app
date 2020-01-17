@@ -42,7 +42,7 @@ class Header extends React.Component {
               <Button>整理态</Button>
             </Button.Group>
             <Button.Group className="lh64 fr mr10">
-              <Button className={this.props.setStatusBtnClass}>{this.props.setStatusBtnText}</Button>
+              <Button className={this.props.setStatusBtn.className}>{this.props.setStatusBtn.text}</Button>
               <Button className="btn-geekblue">综合接续</Button>
               {/* <Button className="btn-geekblue">密码验证</Button> */}
               <Button className="btn-dust">结束会话</Button>

@@ -1,17 +1,19 @@
 let resText = ''
 const initState = {
-    waitNum: 0, 
+    waitNum: 0,
     statusText: '未签人',
     time: '00:00:00',
     setStatusBtnClass: 'btn-volcano',
     setStatusBtnText: '示忙',
+    setStatusBtn: {text: '示忙', className: 'btn-volcano'},
     restBtnText: '休息',
     otherworkBtnText: '整理',
     loginBtnText: '签入',
     loginBtnClass: 'btn-green',
     restVisible: false,
     reKey: 'req',
-
+    skillNameList: [],
+    skillListVisible: false
 }
 const updateText = (state = initState, action) => {
     switch (action.type) {
@@ -61,6 +63,14 @@ const updateText = (state = initState, action) => {
         case 'REKEY':
             return Object.assign({}, state, {
                 reKey: action.reKey
+            })
+        case 'SKILLNAMELIST':
+            return Object.assign({}, state, {
+                skillNameList: action.skillNameList
+            })
+        case 'SKILLLISTVISIBLE':
+            return Object.assign({}, state, {
+                skillListVisible: action.skillListVisible
             })
         default:
             return state

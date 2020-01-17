@@ -1,10 +1,6 @@
 import moment from 'moment';
 import axios from 'axios';
 export const ServerInfo = {
-	tyddUrl: "KEY_TYDD_URL",
-	domin: "KEY_DOMIN",
-	password: "KEY_PASSWORD",
-	deviceNo: "KEY_DEVICENO",
 	eventpollTimer: "", //轮询定时器
 	queryWaitNumTimer: "", //查询AS01定时器
 }
@@ -29,6 +25,7 @@ export const AgentInfo = {
 	systemCode: '',
 	restTime: '',
 	provId: '',
+	skillNameList: []
 }
 
 export const CallInfo = {
@@ -68,7 +65,7 @@ export const formatDuration = duration => {
 }
 
 export const onValuesChange = (props, changedValues, allValues) => {
-	console.log(removeUndefine(allValues))
+	// console.log(removeUndefine(allValues))
 	props.onChange(removeUndefine(allValues));
 }
 
@@ -92,7 +89,7 @@ export const buildRes = (interfaceName, res) => {
 }
 
 export const eventpoll = props => {
-	axios.post("http://"+ localStorage.getItem("tyddURL") +"/ccacs/ws/event/poll", '{}', {
+	axios.post("http://" + JSON.parse(localStorage.getItem("config")).tyddURL + "/ccacs/ws/event/poll", '{}', {
 		withCredentials: true,
 		timeout: 11000,
 	}).then((res) => {
@@ -122,8 +119,9 @@ export const eventpoll = props => {
 					// }
 					statusTimer(props);
 					if (props.statusText !== '待接听') {
+						console.log("示忙")
 						props.onStatusTextChange({ statusText: '空闲', statusBtnClass: 'btn-green' });
-						props.onSetStatusChange({ setStatusBtnText: '示忙', setStatusBtnClass: 'btn-volcano' });
+						props.onSetStatusChange({ text: '示忙', className: 'btn-volcano' });
 						props.onOtherworkChange({ otherworkBtnText: '整理' });
 					}
 				} else if (res.data.events[i].eventId === 351 && res.data.events[i].agentState === 3) {
@@ -215,7 +213,7 @@ export const queryWaitNum = props => {
 		agentId: AgentInfo.agentId,
 		systemCode: AgentInfo.systemCode
 	}
-	axios.post("http://"+ localStorage.getItem("tyddURL") +"/ccacs/ws/query/queryacdstatus", JSON.stringify(params), {
+	axios.post("http://" + JSON.parse(localStorage.getItem("config")).tyddURL + "/ccacs/ws/query/queryacdstatus", JSON.stringify(params), {
 		withCredentials: true,
 	}).then((res) => {
 		let queueSize = 0;
@@ -229,5 +227,16 @@ export const queryWaitNum = props => {
 			}
 		}
 		props.onWaitNumChange(queueSize);
+	})
+}
+
+export const postMsg = (props, params, url) => {
+	const interfaceName = url.substring(url.lastIndexOf('/') + 1)
+	return axios.post("http://" + JSON.parse(localStorage.getItem("config")).tyddURL + url, JSON.stringify(params), {
+		withCredentials: true,
+	}).then((res) => {
+		props.onResponse(buildRes(interfaceName, res.data));
+	}).catch(error => {
+		props.onResponse(buildRes(interfaceName, { "message": error.message }));
 	})
 }

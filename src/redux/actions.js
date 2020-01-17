@@ -70,3 +70,17 @@ export const updateReKey = reKey => {
         reKey
     }
 }
+
+export const updateSkillNameList = skillNameList => {
+    return {
+        type: 'SKILLNAMELIST',
+        skillNameList
+    }
+}
+
+export const updateSkillListVisible = skillListVisible => {
+    return {
+        type: 'SKILLLISTVISIBLE',
+        skillListVisible
+    }
+}
