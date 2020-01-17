@@ -2,6 +2,7 @@ import React from 'react';
 import { Row, Col, Button } from 'antd';
 import axios from 'axios';
 import RestModal from './modal/rest'
+import SkillListModal from './modal/skillList'
 
 class Header extends React.Component {
   toggleRestModal = () => {
@@ -52,6 +53,7 @@ class Header extends React.Component {
           </Col>
         </Row>
         <RestModal {...this.props}></RestModal>
+        <SkillListModal {...this.props}></SkillListModal>
       </header>
     )
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Row, Col, Input, Tabs } from 'antd';
 import { Switch, Route } from "react-router-dom";
-import { LoginCard, ResetAgentSkillsCard, SetEnvirmentCard, AutoReadyCard, SetAgentStateCard } from './card'
+import { LoginCard, ResetAgentSkillsCard, SetEnvirmentCard, AutoReadyCard, SetAgentStateCard, QueryAgentStateCard, CallOutCard } from './card'
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 class Content extends React.Component {
@@ -46,6 +46,12 @@ class Content extends React.Component {
               </Route>
               <Route path="/ccacs/setagentstate" >
                 <SetAgentStateCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/agentstate" >
+                <QueryAgentStateCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/callout" >
+                <CallOutCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
               </Route>
               <Route path="/">
                 <SetEnvirmentCard onChange={this.props.onChange} onReKeyChange={this.props.onReKeyChange}/>

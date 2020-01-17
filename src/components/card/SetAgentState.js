@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Select, Tabs, Input } from 'antd';
+import { Button, Form, Select, Tabs, Input, Tooltip, Icon } from 'antd';
 import axios from 'axios';
 import { onValuesChange, formItemLayout, removeUndefine, buildRes } from '../../assets/js/global';
 const { Option } = Select;
@@ -39,13 +39,18 @@ class SetAgentState extends React.Component {
     const { getFieldDecorator } = this.props.form;
     let rest = ""
     if (this.state.rest === "true") {
-       rest = <div><Form.Item label="reason">
-        {getFieldDecorator('reason', {rules: [{ required: true }]})(<Input name="reason" placeholder="Please input your reason!" />)}
-      </Form.Item>
-        <Form.Item label="restTime">
-          {getFieldDecorator('restTime', {rules: [{ required: true }]})(<Input name="restTime" placeholder="Please input your restTime!" />)}
+      rest = <div>
+        <Form.Item label={<span>reason&nbsp;<Tooltip title='格式为：'><Icon type="question-circle" /></Tooltip></span>}>
+          <Tooltip trigger={['focus']} title={'格式为：'} placement="top" overlayClassName="numeric-input" >
+            {getFieldDecorator('reason', { rules: [{ required: true }] })(<Input name="reason" placeholder="Please input your reason!" />)}
+          </Tooltip>
         </Form.Item>
-        </div>
+        <Form.Item label={<span>restTime&nbsp;<Tooltip title='格式为：'><Icon type="question-circle" /></Tooltip></span>}>
+          <Tooltip trigger={['focus']} title={'格式为：'} placement="top" overlayClassName="numeric-input" >
+            {getFieldDecorator('restTime', { rules: [{ required: true }] })(<Input name="restTime" placeholder="Please input your restTime!" />)}
+          </Tooltip>
+        </Form.Item>
+      </div>
     }
     return (
       <Tabs defaultActiveKey="1">
@@ -70,12 +75,6 @@ class SetAgentState extends React.Component {
                 <Option value="0">退出状态</Option>
               </Select>)}
             </Form.Item>
-            {/* <Form.Item label="reason">
-              {getFieldDecorator('reason', {})(<Input name="reason" placeholder="Please input your reason!" />)}
-            </Form.Item>
-            <Form.Item label="restTime">
-              {getFieldDecorator('restTime', {})(<Input name="restTime" placeholder="Please input your restTime!" />)}
-            </Form.Item> */}
             {rest}
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
               <Button type="primary" onClick={this.send}>send</Button>
