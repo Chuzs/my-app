@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Form, Select, Tabs, Input, Tooltip, Icon } from 'antd';
-import axios from 'axios';
-import { onValuesChange, formItemLayout, removeUndefine, buildRes } from '../../assets/js/global';
+import { onValuesChange, formItemLayout, postMsg } from '../../assets/js/global';
 const { Option } = Select;
 const { TabPane } = Tabs;
 
@@ -14,14 +13,7 @@ class SetAgentState extends React.Component {
   }
   send = () => {
     this.props.onReKeyChange('res');
-    axios.post("http://" + localStorage.getItem("tyddURL") + "/ccacs/ws/agent/setagentstate",
-      JSON.stringify(removeUndefine(this.props.form.getFieldsValue())), {
-      withCredentials: true,
-    }).then(res => {
-      this.props.onResponse(buildRes('setagentstate', res.data));
-    }).catch(error => {
-      this.props.onResponse(buildRes('setagentstate', { "message": error.message }));
-    })
+    postMsg(this.props, this.props.form.getFieldsValue(), "/ccacs/ws/agent/setagentstate")
   }
   toggleRest = (value) => {
     if (value === "8") {
@@ -77,7 +69,7 @@ class SetAgentState extends React.Component {
             </Form.Item>
             {rest}
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
-              <Button type="primary" onClick={this.send}>send</Button>
+              <Button type="primary" onClick={this.send}>Send</Button>
             </Form.Item>
           </Form>
         </TabPane>

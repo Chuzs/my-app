@@ -49,6 +49,7 @@ class Login extends React.Component {
             this.props.onResponse(buildRes('skillsinfo', res.data));
             if (res.data.result === '0') {
               AgentInfo.skillInfo = res.data.skillsInfo;
+              AgentInfo.skillNameList = [];
               let skillNameList = [];
               for (let i in AgentInfo.skillInfo) {
                 skillNameList.push(AgentInfo.skillInfo[i].skillName)
@@ -169,7 +170,7 @@ class Login extends React.Component {
             <Form.Item label="平台工号">
               {getFieldDecorator('agentId', {
                 rules: [{ required: true, message: 'Please input your agentId!' }], initialValue: '1006'
-              })(<Input name="agentId" />)}
+              })(<Input name="agentId" placeholder="Please input your agentId!" />)}
             </Form.Item>
             <Form.Item label="坐席分机号">
               {getFieldDecorator('phoneNum', {

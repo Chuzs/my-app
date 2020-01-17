@@ -21,7 +21,6 @@ class skillListModal extends React.Component {
     }).catch(error => {
       this.props.onResponse(buildRes('resetskill', { "message": error.message }));
     })
-    AgentInfo.skillNameList = [];
     this.setState({
       indeterminate: false,
       checkAll: true
@@ -30,7 +29,6 @@ class skillListModal extends React.Component {
 
   handleCancel = () => {
     this.props.onSkillListVisibleChange(false);
-    AgentInfo.skillNameList = [];
     this.setState({
       indeterminate: false,
       checkAll: true

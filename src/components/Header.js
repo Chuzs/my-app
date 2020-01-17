@@ -6,7 +6,7 @@ import SkillListModal from './modal/skillList'
 
 class Header extends React.Component {
   toggleRestModal = () => {
-    if(this.props.restVisible){
+    if (this.props.restVisible) {
       this.props.onRestVisibleChange(false);
     } else {
       this.props.onRestVisibleChange(true);

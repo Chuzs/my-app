@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Row, Col, Input, Tabs } from 'antd';
 import { Switch, Route } from "react-router-dom";
-import { LoginCard, ResetAgentSkillsCard, SetEnvirmentCard, AutoReadyCard, SetAgentStateCard, QueryAgentStateCard, CallOutCard } from './card'
+import * as Card from './card'
 const { TabPane } = Tabs;
 const { TextArea } = Input;
 class Content extends React.Component {
@@ -36,25 +36,40 @@ class Content extends React.Component {
           <Col xs={0} sm={0} md={0} lg={9} xl={10} xxl={10} offset={1}>
             <Switch>
               <Route path="/ccacs/login" >
-                <LoginCard {...this.props} />
+                <Card.LoginCard {...this.props} />
               </Route>
               <Route path="/ccacs/resetAgentSkills">
-                <ResetAgentSkillsCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange} />
+                <Card.ResetAgentSkillsCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange} />
               </Route>
               <Route path="/ccacs/setagentautoenteridle" >
-                <AutoReadyCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+                <Card.AutoReadyCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
               </Route>
               <Route path="/ccacs/setagentstate" >
-                <SetAgentStateCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+                <Card.SetAgentStateCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
               </Route>
               <Route path="/ccacs/agentstate" >
-                <QueryAgentStateCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+                <Card.QueryAgentStateCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
               </Route>
               <Route path="/ccacs/callout" >
-                <CallOutCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+                <Card.CallOutCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/transout" >
+                <Card.TransoutCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/callinfo" >
+                <Card.QueryCallInfoCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/querycalldata" >
+                <Card.QueryCallDataCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/setcalldata" >
+                <Card.SetCallDataCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/agentcallidinfo" >
+                <Card.AgentCallIdInfoCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
               </Route>
               <Route path="/">
-                <SetEnvirmentCard onChange={this.props.onChange} onReKeyChange={this.props.onReKeyChange}/>
+                <Card.SetEnvirmentCard onChange={this.props.onChange} onReKeyChange={this.props.onReKeyChange}/>
               </Route>
               
             </Switch>

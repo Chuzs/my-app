@@ -232,7 +232,7 @@ export const queryWaitNum = props => {
 
 export const postMsg = (props, params, url) => {
 	const interfaceName = url.substring(url.lastIndexOf('/') + 1)
-	return axios.post("http://" + JSON.parse(localStorage.getItem("config")).tyddURL + url, JSON.stringify(params), {
+	return axios.post("http://" + JSON.parse(localStorage.getItem("config")).tyddURL + url, JSON.stringify(removeUndefine(params)), {
 		withCredentials: true,
 	}).then((res) => {
 		props.onResponse(buildRes(interfaceName, res.data));

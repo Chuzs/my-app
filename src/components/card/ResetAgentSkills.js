@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Form, Input, Tabs, Select, Row, Col } from 'antd';
-import { onValuesChange } from '../../assets/js/global'
+import { onValuesChange, postMsg } from '../../assets/js/global'
 const { TabPane } = Tabs;
 const { Option } = Select;
 const InputGroup = Input.Group;
@@ -34,15 +34,20 @@ class ResetAgentSkills extends React.Component {
       keys: this.state.keys,
     });
     id--
-    setTimeout(() => {onValuesChange(this.props, "", this.props.form.getFieldsValue())}, 10);
+    setTimeout(() => { onValuesChange(this.props, "", this.props.form.getFieldsValue()) }, 10);
   };
-  
+
   add = () => {
     this.setState({
       keys: this.state.keys.concat(id++),
     });
-    setTimeout(() => {onValuesChange(this.props, "", this.props.form.getFieldsValue())}, 10);
+    setTimeout(() => { onValuesChange(this.props, "", this.props.form.getFieldsValue()) }, 10);
   };
+
+  send = () => {
+    this.props.onReKeyChange('res');
+    postMsg(this.props, this.props.form.getFieldsValue(), "/ccacs/ws/agent/resetskill");
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     const rows = this.state.keys.map((k, index) => (
@@ -99,7 +104,7 @@ class ResetAgentSkills extends React.Component {
               {rows}
             </Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
-              <Button type="primary" htmlType="submit">Submit</Button>
+              <Button type="primary" onClick={this.send}>Send</Button>
             </Form.Item>
           </Form>
         </TabPane>
