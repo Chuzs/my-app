@@ -7,6 +7,12 @@ class QueryCallData extends React.Component {
   componentDidMount() {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
   }
+  componentDidUpdate() {
+    const resText = document.getElementsByClassName('resText')[0]
+    if (resText) {
+      resText.scrollTop = resText.scrollHeight;
+    }
+  }
   send = () => {
     this.props.onReKeyChange('res');
     postMsg(this.props, this.props.form.getFieldsValue(), "/ccacs/ws/call/querycalldata")
@@ -20,7 +26,7 @@ class QueryCallData extends React.Component {
             <Form.Item label="callId">
               {getFieldDecorator('callId', {
                 rules: [{ required: true, }],
-              })(<Input name="callId" placeholder="无需填写，通话后自动添加"/>)}
+              })(<Input name="callId" placeholder="无需填写，通话后自动添加" />)}
             </Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>
               <Button type="primary" onClick={this.send}>Send</Button>

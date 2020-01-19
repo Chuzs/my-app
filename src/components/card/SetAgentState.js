@@ -11,6 +11,12 @@ class SetAgentState extends React.Component {
   componentDidMount() {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
   }
+  componentDidUpdate() {
+    const resText = document.getElementsByClassName('resText')[0]
+    if (resText) {
+      resText.scrollTop = resText.scrollHeight;
+    }
+  }
   send = () => {
     this.props.onReKeyChange('res');
     postMsg(this.props, this.props.form.getFieldsValue(), "/ccacs/ws/agent/setagentstate")

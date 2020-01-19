@@ -24,6 +24,12 @@ class ResetAgentSkills extends React.Component {
   componentDidMount() {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
   }
+  componentDidUpdate() {
+    const resText = document.getElementsByClassName('resText')[0]
+    if (resText) {
+      resText.scrollTop = resText.scrollHeight;
+    }
+  }
   remove = k => {
     if (this.state.keys.length === 0) {
       return;

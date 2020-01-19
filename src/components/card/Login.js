@@ -14,6 +14,15 @@ class Login extends React.Component {
     userCenter: "false",
     register: "false"
   }
+  componentDidMount() {
+    onValuesChange(this.props, "", this.props.form.getFieldsValue());
+  }
+  componentDidUpdate() {
+    const resText = document.getElementsByClassName('resText')[0]
+    if (resText) {
+      resText.scrollTop = resText.scrollHeight;
+    }
+  }
   login = () => {
     this.props.onReKeyChange('res');
     let registerData = {
@@ -94,9 +103,7 @@ class Login extends React.Component {
     });
     setTimeout(() => { onValuesChange(this.props, "", this.props.form.getFieldsValue()) }, 10);
   };
-  componentDidMount() {
-    onValuesChange(this.props, "", this.props.form.getFieldsValue());
-  }
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const rows = this.state.keys.map((k, index) => (
@@ -175,7 +182,7 @@ class Login extends React.Component {
             <Form.Item label="坐席分机号">
               {getFieldDecorator('phoneNum', {
                 rules: [{ required: true, message: 'Please input your phoneNum!' }],
-                initialValue: JSON.parse(localStorage.getItem('config')) ? JSON.parse(localStorage.getItem('config')) : ''
+                initialValue: JSON.parse(localStorage.getItem('config')) ? JSON.parse(localStorage.getItem('config')).userName : ''
               })(<Input name="phoneNum" placeholder="Please input your phoneNum!" />)}
             </Form.Item>
             {SkillId}

@@ -49,7 +49,7 @@ body {
   font-weight: 500;
 }
 
-.main-menu:hover .main-menu-inner {
+.main-menu:hover .main-menu-inner ,.resText:hover{
   overflow-y: auto;
 }
 
@@ -69,3 +69,9 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.resText {
+  max-height: calc(100vh - 160px) !important;
+  overflow: hidden;
+}
+

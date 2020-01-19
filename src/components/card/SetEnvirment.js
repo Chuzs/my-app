@@ -16,6 +16,12 @@ class SetEnvirment extends React.Component {
   componentDidMount() {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
   }
+  componentDidUpdate() {
+    const resText = document.getElementsByClassName('resText')[0]
+    if (resText) {
+      resText.scrollTop = resText.scrollHeight;
+    }
+  }
   save = () => {
     localStorage.setItem("config", JSON.stringify(this.props.form.getFieldsValue()));
     console.log(JSON.parse(localStorage.getItem("config")))

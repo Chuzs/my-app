@@ -44,8 +44,7 @@ const updateText = (state = initState, action) => {
             })
         case 'STATUS':
             return Object.assign({}, state, {
-                statusText: action.statusBtn.statusText,
-                statusBtnClass: action.statusBtn.statusBtnClass
+                statusBtn: action.statusBtn
             })
         case 'TIME':
             return Object.assign({}, state, {

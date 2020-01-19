@@ -77,10 +77,10 @@ class Content extends React.Component {
           <Col xs={0} sm={0} md={0} lg={9} xl={10} xxl={10} offset={2} >
             <Tabs activeKey={this.props.reKey} tabBarExtraContent={this.state.operation} onTabClick={this.onClick}>
               <TabPane tab="请求报文" key="req">
-                <TextArea style={{ "resize": "none", "maxHeight": "calc(100vh - 300px)", "border": "none" }} autoSize={{ minRows: 1 }} value={reqText}></TextArea>
+                <TextArea style={{ "resize": "none", "border": "none" }} autoSize={{ minRows: 1 }} value={reqText}></TextArea>
               </TabPane>
               <TabPane tab="响应报文" key="res">
-                <TextArea style={{ "resize": "none", "maxHeight": "calc(100vh - 300px)", "border": "none" }} autoSize="true" value={resText}></TextArea>
+                <TextArea className="resText" style={{ "resize": "none", "border": "none" }} autoSize="true" value={resText}></TextArea>
               </TabPane>
             </Tabs>
           </Col>

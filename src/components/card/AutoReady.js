@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, Form, Select, Tabs } from 'antd';
-import axios from 'axios';
-import { onValuesChange, formItemLayout, removeUndefine, buildRes } from '../../assets/js/global';
+import { onValuesChange, formItemLayout, postMsg } from '../../assets/js/global';
 const { Option } = Select;
 const { TabPane } = Tabs;
 
@@ -9,16 +8,15 @@ class AutoReady extends React.Component {
   componentDidMount() {
     onValuesChange(this.props, "", this.props.form.getFieldsValue());
   }
+  componentDidUpdate() {
+    const resText = document.getElementsByClassName('resText')[0]
+    if (resText) {
+      resText.scrollTop = resText.scrollHeight;
+    }
+  }
   send = () => {
     this.props.onReKeyChange('res');
-    axios.post("http://" + localStorage.getItem("tyddURL") + "/ccacs/ws/agent/setagentautoenteridle",
-        JSON.stringify(removeUndefine(this.props.form.getFieldsValue())), {
-        withCredentials: true,
-      }).then(res => {
-        this.props.onResponse(buildRes('setagentautoenteridle', res.data));
-      }).catch(error => {
-        this.props.onResponse(buildRes('setagentautoenteridle', { "message": error.message }));
-      })
+    postMsg(this.props, this.props.form.getFieldsValue(), "/ccacs/ws/agent/setagentautoenteridle")
   }
   render() {
     const { getFieldDecorator } = this.props.form;
