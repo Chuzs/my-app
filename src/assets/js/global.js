@@ -92,7 +92,7 @@ export const eventpoll = props => {
 	axios.post("http://" + JSON.parse(localStorage.getItem("config")).tyddURL + "/ccacs/ws/event/poll", '{}', {
 		withCredentials: true,
 		timeout: 11000,
-	}).then((res) => {
+	}).then(res => {
 		if (res.data.events.length !== 0) {
 			props.onResponse(buildRes('eventpoll', res.data));
 			for (var i = 0; i < res.data.events.length; i++) {
@@ -215,7 +215,7 @@ export const queryWaitNum = props => {
 	}
 	axios.post("http://" + JSON.parse(localStorage.getItem("config")).tyddURL + "/ccacs/ws/query/queryacdstatus", JSON.stringify(params), {
 		withCredentials: true,
-	}).then((res) => {
+	}).then(res => {
 		let queueSize = 0;
 		if (res.data.result === '0') {
 			for (let i in res.data.hwAcdInfos) {
@@ -234,7 +234,7 @@ export const postMsg = (props, params, url) => {
 	const interfaceName = url.substring(url.lastIndexOf('/') + 1)
 	return axios.post("http://" + JSON.parse(localStorage.getItem("config")).tyddURL + url, JSON.stringify(removeUndefine(params)), {
 		withCredentials: true,
-	}).then((res) => {
+	}).then(res => {
 		props.onResponse(buildRes(interfaceName, res.data));
 	}).catch(error => {
 		props.onResponse(buildRes(interfaceName, { "message": error.message }));

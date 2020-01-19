@@ -25,10 +25,11 @@ class Login extends React.Component {
   }
   login = () => {
     this.props.onReKeyChange('res');
+    let config = JSON.parse(localStorage.getItem('config'));
     let registerData = {
-      "userName": localStorage.getItem('userName'),
-      "userPasswd": localStorage.getItem('userPasswd'),
-      "domin": localStorage.getItem('domin')
+      "userName": config.userName,
+      "userPasswd": config.userPasswd,
+      "domin": config.domin
     }
     let registerSuccess = false;
     if (this.state.register === "true") {
