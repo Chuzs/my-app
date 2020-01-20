@@ -68,6 +68,45 @@ class Content extends React.Component {
               <Route path="/ccacs/agentcallidinfo" >
                 <Card.AgentCallIdInfoCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
               </Route>
+              <Route path="/ccacs/releasecall" >
+                <Card.ReleaseCallCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/internalhelp" >
+                <Card.InternalHelpCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/conference" >
+                <Card.ConferenceCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/setmute" >
+                <Card.SetMuteCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/hold" >
+                <Card.HoldCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/unhold" >
+                <Card.UnholdCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/agentsenddtmf" >
+                <Card.AgentSendDtmfCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/answer" >
+                <Card.AnwserCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/forceresetstate" >
+                <Card.ForceResetStateCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/autoanswer" >
+                <Card.AutoAnswerCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/supervise" >
+                <Card.SuperviseCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/insert" >
+                <Card.InsertCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/intercept" >
+                <Card.InterceptCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
               <Route path="/">
                 <Card.SetEnvirmentCard onChange={this.props.onChange} onReKeyChange={this.props.onReKeyChange}/>
               </Route>
