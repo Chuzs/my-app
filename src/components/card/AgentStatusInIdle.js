@@ -4,7 +4,7 @@ import { onValuesChange, formItemLayout, postMsg } from '../../assets/js/global'
 const { TabPane } = Tabs;
 const { Option } = Select;
 
-class ResetAgentSkills extends React.Component {
+class AgentStatusInIdle extends React.Component {
     componentDidMount() {
         onValuesChange(this.props, "", this.props.form.getFieldsValue());
     }
@@ -16,25 +16,20 @@ class ResetAgentSkills extends React.Component {
     }
     send = () => {
         this.props.onReKeyChange('res');
-        postMsg(this.props, this.props.form.getFieldsValue(), "/ccbms/ws/operate/resetagentskills");
+        postMsg(this.props, this.props.form.getFieldsValue(), "/ccbms/ws/monitor/agentstatusinidle");
     }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <Tabs defaultActiveKey="1">
-                <TabPane tab="批量重设技能队列" key="1">
+                <TabPane tab="查询签入空闲座席的实时监控信息" key="1">
                     <Form {...formItemLayout}>
                         <Form.Item label="URL">
-                            <Input name="URL" value="/ccbms/ws/operate/resetagentskills" disabled />
+                            <Input name="URL" value="/ccbms/ws/monitor/agentstatusinidle" disabled />
                         </Form.Item>
-                        <Form.Item label="agentIds">
-                            {getFieldDecorator('agentIds', { rules: [{ required: true, message: 'Please input your agentIds!' }] })(
-                                <Input name="agentIds" placeholder="Please input your agentIds!" />
-                            )}
-                        </Form.Item>
-                        <Form.Item label="skillPrioritys">
-                            {getFieldDecorator('skillPrioritys', { rules: [{ required: true, message: 'Please input your skillPrioritys!' }] })(
-                                <Input name="skillPrioritys" placeholder="Please input your skillPrioritys!" />
+                        <Form.Item label="skillIds">
+                            {getFieldDecorator('skillIds', { rules: [{ required: true, message: 'Please input your skillIds!' }] })(
+                                <Input name="skillIds" placeholder="Please input your skillIds!" />
                             )}
                         </Form.Item>
                         <Form.Item label="systemCode">
@@ -42,10 +37,10 @@ class ResetAgentSkills extends React.Component {
                                 <Input name="systemCode" placeholder="Please input your systemCode!" />
                             )}
                         </Form.Item>
-                        <Form.Item label="isPermanent">
-                            {getFieldDecorator('isPermanent', {
-                                rules: [{ required: true }], initialValue: "0"
-                            })(<Select name="isPermanent">
+                        <Form.Item label="isSkills">
+                            {getFieldDecorator('isSkills', {
+                                rules: [{ required: true }], initialValue: "1"
+                            })(<Select name="isSkills">
                                 <Option value="1">true</Option>
                                 <Option value="0">false</Option>
                             </Select>)}
@@ -59,5 +54,5 @@ class ResetAgentSkills extends React.Component {
         )
     }
 }
-const ResetAgentSkillsCard = Form.create({ onValuesChange })(ResetAgentSkills);
-export default ResetAgentSkillsCard;
+const AgentStatusInIdleCard = Form.create({ onValuesChange })(AgentStatusInIdle);
+export default AgentStatusInIdleCard;

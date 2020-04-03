@@ -38,8 +38,8 @@ class Content extends React.Component {
               <Route path="/ccacs/login" >
                 <Card.LoginCard {...this.props} />
               </Route>
-              <Route path="/ccacs/resetAgentSkills">
-                <Card.ResetAgentSkillsCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange} />
+              <Route path="/ccacs/resetskill">
+                <Card.ResetSkillCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange} />
               </Route>
               <Route path="/ccacs/setagentautoenteridle" >
                 <Card.AutoReadyCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
@@ -106,6 +106,69 @@ class Content extends React.Component {
               </Route>
               <Route path="/ccacs/intercept" >
                 <Card.InterceptCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/poll" >
+                <Card.EventpollCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/skillsinfo" >
+                <Card.SkillsInfoCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/queryacdstatus" >
+                <Card.QueryAcdStatusCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/agentstatinfo" >
+                <Card.AgentStatInfoCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/setcallnum" >
+                <Card.SetCallNumCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/confirmmessagepush" >
+                <Card.ConfirmMessagePushCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccacs/makecall" >
+                <Card.MakeCallCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbcs/skilllist" >
+                <Card.SkillListCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbcs/queryallskills" >
+                <Card.QueryAllSkillsCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbcs/agentidrange" >
+                <Card.AgentIdRangeCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbms/sendnotes" >
+                <Card.SendNotesCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbms/agentstatusinidle" >
+                <Card.AgentStatusInIdleCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbms/agentskillstatusinfo" >
+                <Card.AgentSkillStatusInfoCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbms/siteagentcallandskillinfobyagentids" >
+                <Card.SiteAgentCallAndSkillInfoByAgentIdsCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbms/resetagentskills" >
+                <Card.ResetAgentSkillsCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbms/queryagentStatebyskillids" >
+                <Card.QueryAgentStateBySkillIdsCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbms/agentstatusinfobyagentids" >
+                <Card.AgentStatusInfoByAgentIdsCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbms/agentcurrentservestatusinfo" >
+                <Card.AgentCurrentServeStatusInfoCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbms/skillstatusinfo" >
+                <Card.SkillStatusInfoCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbms/agentidlinknumbyskillsdandstate" >
+                <Card.AgentIdLinkNumBySkillIdAndStateCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
+              </Route>
+              <Route path="/ccbms/queryagentidstatusbyagentids" >
+                <Card.QueryAgentIdStatusByAgentIdsCard onChange={this.props.onChange} onResponse={this.props.onResponse} onReKeyChange={this.props.onReKeyChange}/>
               </Route>
               <Route path="/">
                 <Card.SetEnvirmentCard onChange={this.props.onChange} onReKeyChange={this.props.onReKeyChange}/>

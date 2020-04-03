@@ -15,7 +15,7 @@ class Sider extends React.Component {
             </Menu.Item>
             <SubMenu key="ccacs" title={<span><Icon type="user" />ccacs接口</span>} >
               <Menu.Item key="login"><Link to="/ccacs/login">签入</Link> </Menu.Item>
-              <Menu.Item key="resetAgentSkills"><Link to="/ccacs/resetAgentSkills">重设坐席技能</Link></Menu.Item>
+              <Menu.Item key="resetAgentSkills"><Link to="/ccacs/resetskill">重设坐席技能</Link></Menu.Item>
               <Menu.Item key="setagentautoenteridle"><Link to="/ccacs/setagentautoenteridle">自动空闲</Link></Menu.Item>
               <Menu.Item key="setagentstate"><Link to="/ccacs/setagentstate">修改坐席状态</Link></Menu.Item>
               <Menu.Item key="agentstate"><Link to="/ccacs/agentstate">查询坐席当前状态</Link></Menu.Item>
@@ -47,22 +47,22 @@ class Sider extends React.Component {
               <Menu.Item key="makecall"><Link to="/ccacs/makecall">视频外呼</Link></Menu.Item>
             </SubMenu>
             <SubMenu key="ccbms" title={<span><Icon type="laptop" />ccbms接口</span>} >
-              <Menu.Item key="sendnotes"><Link to="/ccacs/sendnotes">便笺发送</Link></Menu.Item>
-              <Menu.Item key="agentstatusinidle"><Link to="/ccacs/agentstatusinidle">查询签入空闲座席的实时监控信息</Link></Menu.Item>
-              <Menu.Item key="agentskillstatusinfo"><Link to="/ccacs/agentskillstatusinfo">查询多个技能下的座席实时监控信息 RT_restApI_2</Link></Menu.Item>
-              <Menu.Item key="siteagentcallandskillinfobyagentids "><Link to="/ccacs/siteagentcallandskillinfobyagentids">查询呼叫和技能信息</Link></Menu.Item>
-              <Menu.Item key="resetagentskills"><Link to="/ccacs/resetagentskills">批量重设技能队列</Link></Menu.Item>
-              <Menu.Item key="queryAgentStateBySkillIds"><Link to="/ccacs/queryAgentStateBySkillIds">查询技能下坐席状态 RT_restApI_4</Link></Menu.Item>
-              <Menu.Item key="agentstatusinfobyagentids"><Link to="/ccacs/agentstatusinfobyagentids">查询多个座席人员活动状态的实时监控信息 AP05</Link></Menu.Item>
-              <Menu.Item key="agentcurrentservestatusinfo"><Link to="/ccacs/agentcurrentservestatusinfo">查询多个座席人员当前正在服务的技能和呼叫信息 AP05</Link></Menu.Item>
-              <Menu.Item key="skillstatusinfo"><Link to="/ccacs/skillstatusinfo">查询技能队列的实时监控信息 S12</Link></Menu.Item>
-              <Menu.Item key="agentIdLinkNumBySkillIdAndState"><Link to="/ccacs/agentIdLinkNumBySkillIdAndState">根据技能ID和工号状态查询符合状态的工号、连接数 SXR02</Link></Menu.Item>
-              <Menu.Item key="queryAgentIdStatusByAgentIds"><Link to="/ccacs/queryAgentIdStatusByAgentIds">根据平台工号列表，查询工号状态 SXR01</Link></Menu.Item>
+              <Menu.Item key="sendnotes"><Link to="/ccbms/sendnotes">便笺发送</Link></Menu.Item>
+              <Menu.Item key="agentstatusinidle"><Link to="/ccbms/agentstatusinidle">查询签入空闲座席的实时监控信息</Link></Menu.Item>
+              <Menu.Item key="agentskillstatusinfo"><Link to="/ccbms/agentskillstatusinfo">查询多个技能下的座席实时监控信息 RT_restApI_2</Link></Menu.Item>
+              <Menu.Item key="siteagentcallandskillinfobyagentids "><Link to="/ccbms/siteagentcallandskillinfobyagentids">查询呼叫和技能信息</Link></Menu.Item>
+              <Menu.Item key="resetagentskills"><Link to="/ccbms/resetagentskills">批量重设技能队列</Link></Menu.Item>
+              <Menu.Item key="queryagentStatebyskillids"><Link to="/ccbms/queryagentStatebyskillids">查询技能下坐席状态 RT_restApI_4</Link></Menu.Item>
+              <Menu.Item key="agentstatusinfobyagentids"><Link to="/ccbms/agentstatusinfobyagentids">查询多个座席人员活动状态的实时监控信息 AP05</Link></Menu.Item>
+              <Menu.Item key="agentcurrentservestatusinfo"><Link to="/ccbms/agentcurrentservestatusinfo">查询多个座席人员当前正在服务的技能和呼叫信息 AP05</Link></Menu.Item>
+              <Menu.Item key="skillstatusinfo"><Link to="/ccbms/skillstatusinfo">查询技能队列的实时监控信息 S12</Link></Menu.Item>
+              <Menu.Item key="agentidlinknumbyskillsdandstate"><Link to="/ccbms/agentidlinknumbyskillsdandstate">根据技能ID和工号状态查询符合状态的工号、连接数 SXR02</Link></Menu.Item>
+              <Menu.Item key="queryagentidstatusbyagentids"><Link to="/ccbms/queryagentidstatusbyagentids">根据平台工号列表，查询工号状态 SXR01</Link></Menu.Item>
             </SubMenu>
             <SubMenu key="ccbcs" title={<span> <Icon type="notification" />ccbcs接口 </span>} >
-              <Menu.Item key="skilllist"><Link to="/ccacs/skilllist">查询座席的技能列表 AP03</Link></Menu.Item>
-              <Menu.Item key="allskill"><Link to="/ccacs/allskill">查询所有技能 AP04</Link></Menu.Item>
-              <Menu.Item key="agentid"><Link to="/ccacs/agentid">查询工号区间 RT_restApI_6</Link></Menu.Item>
+              <Menu.Item key="skilllist"><Link to="/ccbcs/skilllist">查询座席的技能列表 AP03</Link></Menu.Item>
+              <Menu.Item key="queryallskills"><Link to="/ccbcs/queryallskills">查询所有技能 AP04</Link></Menu.Item>
+              <Menu.Item key="agentidrange"><Link to="/ccbcs/agentidrange">查询工号区间 RT_restApI_6</Link></Menu.Item>
             </SubMenu>
           </Menu>
         </section>
