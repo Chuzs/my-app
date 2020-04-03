@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, Input, Tabs, Select } from 'antd';
+import { Button, Form, Input, Tabs } from 'antd';
 import { onValuesChange, formItemLayout, postMsg } from '../../assets/js/global'
 const { TabPane } = Tabs;
 

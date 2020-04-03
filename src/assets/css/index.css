@@ -59,6 +59,10 @@ body {
   padding-top: 16px;
 }
 
+.main-menu-inner>ul {
+  min-height: calc(100vh - 90px);
+}
+
 .main-content {
   max-height: calc(100vh - 64px);
   overflow-y: auto;

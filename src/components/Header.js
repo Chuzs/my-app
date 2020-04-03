@@ -47,7 +47,7 @@ class Header extends React.Component {
               {/* <Button className="btn-geekblue">密码验证</Button> */}
               <Button className="btn-dust">结束会话</Button>
               <Button className="btn-cyan" onClick={this.toggleRestModal}>{this.props.restBtnText}</Button>
-              <Button className="btn-daybreak">外呼</Button>
+              {/* <Button className="btn-daybreak">外呼</Button> */}
               <Button className="btn-purple">保持</Button>
             </Button.Group>
           </Col>
