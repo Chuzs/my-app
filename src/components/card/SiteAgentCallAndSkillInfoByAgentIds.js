@@ -32,7 +32,10 @@ class SiteAgentCallAndSkillInfoByAgentIds extends React.Component {
                             )}
                         </Form.Item>
                         <Form.Item label="systemCode">
-                            {getFieldDecorator('systemCode', { rules: [{ required: true, message: 'Please input your systemCode!' }] })(
+                            {getFieldDecorator('systemCode', { 
+                                rules: [{ required: true, message: 'Please input your systemCode!' }],
+                                initialValue: JSON.parse(localStorage.getItem('config')) ? JSON.parse(localStorage.getItem('config')).systemCode : ''
+                            })(
                                 <Input name="systemCode" placeholder="Please input your systemCode!" />
                             )}
                         </Form.Item>

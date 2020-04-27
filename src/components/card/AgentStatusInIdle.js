@@ -33,16 +33,19 @@ class AgentStatusInIdle extends React.Component {
                             )}
                         </Form.Item>
                         <Form.Item label="systemCode">
-                            {getFieldDecorator('systemCode', { rules: [{ required: true, message: 'Please input your systemCode!' }] })(
+                            {getFieldDecorator('systemCode', { 
+                                rules: [{ required: true, message: 'Please input your systemCode!' }],
+                                initialValue: JSON.parse(localStorage.getItem('config')) ? JSON.parse(localStorage.getItem('config')).systemCode : ''
+                            })(
                                 <Input name="systemCode" placeholder="Please input your systemCode!" />
                             )}
                         </Form.Item>
                         <Form.Item label="isSkills">
                             {getFieldDecorator('isSkills', {
-                                rules: [{ required: true }], initialValue: "1"
+                                rules: [{ required: true }], initialValue: "true"
                             })(<Select name="isSkills">
-                                <Option value="1">true</Option>
-                                <Option value="0">false</Option>
+                                <Option value="true">true</Option>
+                                <Option value="false">false</Option>
                             </Select>)}
                         </Form.Item>
                         <Form.Item wrapperCol={{ span: 12, offset: 8 }}>

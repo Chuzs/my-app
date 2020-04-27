@@ -46,7 +46,9 @@ class SkillList extends React.Component {
               </Tooltip>
             </Form.Item>
             <Form.Item label="系统编码">
-              {getFieldDecorator('systemCode', {})(
+              {getFieldDecorator('systemCode', {
+                initialValue: JSON.parse(localStorage.getItem('config')) ? JSON.parse(localStorage.getItem('config')).systemCode : ''
+              })(
                 <Input name="systemCode" placeholder="Please input your systemCode!" />
               )}
             </Form.Item>

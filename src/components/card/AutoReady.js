@@ -26,10 +26,10 @@ class AutoReady extends React.Component {
           <Form {...formItemLayout}>
             <Form.Item label="flag">
               {getFieldDecorator('flag', {
-                rules: [{ required: true }], initialValue: "0"
+                rules: [{ required: true }], initialValue: "false"
               })(<Select name="flag">
-                <Option value="1">true</Option>
-                <Option value="0">false</Option>
+                <Option value="true">true</Option>
+                <Option value="false">false</Option>
               </Select>)}
             </Form.Item>
             <Form.Item wrapperCol={{ span: 12, offset: 8 }}>

@@ -27,7 +27,9 @@ class AgentIdRange extends React.Component {
                             <Input name="URL" value="/ccbcs/rs/vdns/query/1" disabled />
                         </Form.Item>
                         <Form.Item label="系统编码">
-                            {getFieldDecorator('systemCode', {})(
+                            {getFieldDecorator('systemCode', {
+                                initialValue: JSON.parse(localStorage.getItem('config')) ? JSON.parse(localStorage.getItem('config')).systemCode : ''
+                            })(
                                 <Input name="systemCode" placeholder="Please input your systemCode!" />
                             )}
                         </Form.Item>
