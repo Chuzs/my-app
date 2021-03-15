@@ -14,7 +14,7 @@ class skillListModal extends React.Component {
   };
   handleOk = e => {
     this.props.onSkillListVisibleChange(false);
-    axios.post("http://" + localStorage.getItem("tyddURL") + "/ccacs/ws/agent/resetskill", "{}", {
+    axios.post("http://" + JSON.parse(localStorage.getItem("config")).tyddURL + "/ccacs/ws/agent/resetskill", "{}", {
       withCredentials: true,
     }).then((res) => {
       this.props.onResponse(buildRes('resetskill', res.data));
